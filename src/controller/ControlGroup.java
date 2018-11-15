@@ -7,7 +7,8 @@ public class ControlGroup {
 
     // Controle des différents controller pour respecter le mvc
     public ControlGroup() {
-        Model m = new Model();
+        // par défaut j'ai mis 3 joueurs pour ne pas s'embêter
+        Model m = new Model(3);
         View v = new View(m);
         ControlButton cb = new ControlButton(v, m);
 
