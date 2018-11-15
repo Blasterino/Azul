@@ -7,6 +7,7 @@ public class Model {
     ArrayList<Plateau> listJoueurs;
     ArrayList<Fabrique> listFabrique;
     Fabrique centreTable;
+    Fabrique fabrique;
     Sac defausse;
     Tuile tuilePremierJoueur;
 
@@ -19,12 +20,15 @@ public class Model {
         // creation de la tuile du premier joueur
         tuilePremierJoueur = new Tuile(CouleurTuile.PREMIERJOUEUR);
         listJoueurs = new ArrayList<>();
+        listFabrique = new ArrayList<>();
         // et on place la tuile du premier joueur au centre de la table
         centreTable.getTuileOnFabrique().add(tuilePremierJoueur);
         for(int i = 0; i < nombreJoueur ; i ++){
             Plateau joueur = new Plateau();
             listJoueurs.add(joueur);
         }
+
+        initialisationNombreFabrique();
 
     }
 
@@ -33,19 +37,19 @@ public class Model {
     public void initialisationNombreFabrique(){
         if(nombreJoueur == 2){
             for(int i=0; i<5 ; i++){
-                Fabrique fabrique = new Fabrique();
+                fabrique = new Fabrique();
                 listFabrique.add(fabrique);
             }
         }
         if(nombreJoueur == 3){
             for(int i=0; i<7 ; i++){
-                Fabrique fabrique = new Fabrique();
+                fabrique = new Fabrique();
                 listFabrique.add(fabrique);
             }
         }
         if(nombreJoueur == 4){
             for(int i=0; i<9 ; i++){
-                Fabrique fabrique = new Fabrique();
+                fabrique = new Fabrique();
                 listFabrique.add(fabrique);
             }
         }
@@ -69,6 +73,30 @@ public class Model {
 
 
 
+    public int getNombreJoueur() {
+        return nombreJoueur;
+    }
 
+    public ArrayList<Plateau> getListJoueurs() {
+        return listJoueurs;
+    }
+    public int getNombreFabriqueGame(){
+        return listFabrique.size();
+    }
 
+    public ArrayList<Fabrique> getListFabrique() {
+        return listFabrique;
+    }
+
+    public Fabrique getCentreTable() {
+        return centreTable;
+    }
+
+    public Sac getDefausse() {
+        return defausse;
+    }
+
+    public Tuile getTuilePremierJoueur() {
+        return tuilePremierJoueur;
+    }
 }

@@ -7,7 +7,7 @@ public class Plateau {
     //plateau du joueur
     // A faire plus tard, avec les images,affichage, interactions tout ça tout ça
     ArrayList<Tuile> penalite;
-    int pointDuJoueur;
+    private int pointDuJoueur;
 
 
     public Plateau() {
@@ -67,4 +67,11 @@ public class Plateau {
 
 
 
+    public int getPointDuJoueur() {
+        return pointDuJoueur;
+    }
+
+    public void setPointDuJoueur(int pointDuJoueur) {
+        this.pointDuJoueur = pointDuJoueur;
+    }
 }
