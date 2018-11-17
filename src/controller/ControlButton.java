@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import model.Tuile;
 import view.View;
 
 
@@ -22,10 +23,16 @@ public class ControlButton extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() instanceof JButton){
+        if (e.getSource() instanceof JButton) {
             // contenu de ce que doit faire le bouton lorsque l'on clique dessus
+
+            for (JButton tuilebutton : view.tuile) {
+                if (e.getSource() == tuilebutton) {
+                    System.out.println(tuilebutton);
+                }
+
+            }
         }
+
     }
-
-
 }

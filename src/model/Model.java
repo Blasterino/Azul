@@ -8,12 +8,14 @@ public class Model {
     ArrayList<Fabrique> listFabrique;
     Fabrique centreTable;
     Fabrique fabrique;
+    Sac sacPioche;
     Sac defausse;
     Tuile tuilePremierJoueur;
 
     public Model(int nombreJoueur) {
         this.nombreJoueur = nombreJoueur;
         // On creer la defausse en tant que Sac
+        sacPioche= new Sac();
         defausse= new Sac();
         // On creer le centre de la table en tant qu'une fabrique, pas la peine de creer une autre class
         centreTable = new Fabrique();
@@ -27,7 +29,7 @@ public class Model {
             Plateau joueur = new Plateau();
             listJoueurs.add(joueur);
         }
-
+        sacPioche.remplirPaquetDebutDePartie();
         initialisationNombreFabrique();
 
     }
@@ -98,5 +100,13 @@ public class Model {
 
     public Tuile getTuilePremierJoueur() {
         return tuilePremierJoueur;
+    }
+
+    public Sac getSacPioche() {
+        return sacPioche;
+    }
+
+    public void setSacPioche(Sac sacPioche) {
+        this.sacPioche = sacPioche;
     }
 }

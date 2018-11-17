@@ -13,9 +13,10 @@ public class View extends JFrame {
     Model model;
 
   //  JButton[] boutonBijoux = new JButton[8][8];
-    JButton[] fabrique;
+    public JButton[] tuile;
 
 
+    JPanel[] fabrique;
     JLabel penalite, score;
     ArrayList<JLabel> listScoreJoueurView, listPenaliteJoueurView;
 
@@ -38,15 +39,19 @@ public class View extends JFrame {
     public void setControlButton(ActionListener cb) {
         //mise en place des différents controller de bouton
         // exemple         jbbutton.addActionListener(cb);
+        for (JButton tuileButton : tuile)
+            tuileButton.addActionListener(cb);
     }
 
     public void initAttribut() {
         // Initialisation des attributs
         actionListener = new ControlButton(this, model);
-        fabrique =  new JButton[model.getNombreFabriqueGame()];
+        fabrique =  new JPanel[model.getNombreFabriqueGame()];
+        tuile =  new JButton[4];
         fullView = new JPanel();
         listPenaliteJoueurView = new ArrayList<>();
         listScoreJoueurView = new ArrayList<>();
+
 
         for(Plateau joueurs : model.getListJoueurs()){
             score = new JLabel(String.valueOf(joueurs.getPointDuJoueur()));
@@ -78,9 +83,17 @@ public class View extends JFrame {
 
         middle = new JPanel(new GridLayout(3,3,100,100));
         for (int i = 0; i < model.getNombreFabriqueGame(); i++) {
-            fabrique[i] = new JButton();
-            fabrique[i].addActionListener(actionListener); // ajouter l'écouteur aux
-            fabrique[i].setIcon(new ImageIcon("Resources/ImageFabrique.png"));
+            fabrique[i] = new JPanel();
+           // fabrique[i].addActionListener(actionListener); // ajouter l'écouteur aux
+            fabrique[i].setBackground(Color.orange);
+            for(int j=0;j<4; j++){
+                tuile[j] = new JButton();
+                //j'ajoute sur chaque bouton (tuiles) l'image de la tuile adéquat
+                tuile[j].addActionListener(actionListener);
+                tuile[j].setIcon(new ImageIcon("Resources/"+model.getSacPioche().piocherUneTuileDuSac().getCouleurTuile().getImageTuile()));
+                fabrique[i].add(tuile[j]);
+            }
+
             middle.add(fabrique[i]);
         }
 
@@ -102,6 +115,8 @@ public class View extends JFrame {
         this.setContentPane(root);
 
     }
+
+
 
     //Affichage de la vue
     public void display(){

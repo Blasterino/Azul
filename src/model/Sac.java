@@ -9,7 +9,7 @@ public class Sac {
     static final int nombreDeTuileMaxParCouleur = 20;
 
     public Sac(){
-        contenuSac = null;
+        contenuSac = new ArrayList<>();
     }
 
     public Sac(ArrayList<Tuile> contenuSac) {
@@ -38,6 +38,16 @@ public class Sac {
 
         return contenuSac;
     }
+
+    //On prend une tuile du sac, donc on return la tuile pioché, on mélange le sac, et on supprime cette tuile du sac
+    public Tuile piocherUneTuileDuSac(){
+        Tuile temp = new Tuile();
+        Collections.shuffle(contenuSac);
+        temp = contenuSac.get(0);
+        this.contenuSac.remove(temp);
+        return temp;
+    }
+
 
     public void setContenuSac(ArrayList<Tuile> contenuSac) {
         this.contenuSac = contenuSac;
