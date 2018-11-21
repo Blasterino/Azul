@@ -14,12 +14,13 @@ public class View extends JFrame {
 
   //  JButton[] boutonBijoux = new JButton[8][8];
     public JButton[] tuile,tuilesFabriques;
+    public JButton tuilePremierJoueur;
 
     JPanel[] fabriques;
     JLabel penalite, score;
     ArrayList<JLabel> listScoreJoueurView, listPenaliteJoueurView;
 
-    JPanel fullView, middle;
+    JPanel fullView, middle, centreTable;
 
     protected ActionListener actionListener;
 
@@ -46,6 +47,7 @@ public class View extends JFrame {
         // Initialisation des attributs
         actionListener = new ControlButton(this, model);
         fabriques =  new JPanel[model.getNombreFabriqueGame()];
+        centreTable = new JPanel();
         tuile =  new JButton[4];
         tuilesFabriques = new JButton[4*model.getNombreFabriqueGame()];
         fullView = new JPanel();
@@ -89,7 +91,6 @@ public class View extends JFrame {
             for(int j=0;j<4; j++){
                 tuile[j] = new JButton();
                 tuile[j].addActionListener(actionListener);
-                System.out.println("ajout");
                 //j'ajoute sur chaque bouton (tuiles) l'image de la tuile adéquat
                 tuile[j].setIcon(new ImageIcon("Resources/"+model.getSacPioche().piocherUneTuileDuSac().getCouleurTuile().getImageTuile()));
                 fabriques[i].add(tuile[j]);
@@ -98,6 +99,13 @@ public class View extends JFrame {
 
             middle.add(fabriques[i]);
         }
+        //création du milieu de la table
+        centreTable.setBackground(Color.red);
+        tuilePremierJoueur = new JButton();
+        tuilePremierJoueur.setIcon(new ImageIcon( "Resources/"+model.getTuilePremierJoueur().getCouleurTuile().getImageTuile()));
+        tuilePremierJoueur.addActionListener(actionListener);
+        centreTable.add(tuilePremierJoueur);
+        middle.add(centreTable);
 
 
         JPanel bottom = new JPanel();
