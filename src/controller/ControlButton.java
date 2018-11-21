@@ -26,7 +26,7 @@ public class ControlButton extends JFrame implements ActionListener {
         if (e.getSource() instanceof JButton) {
             // contenu de ce que doit faire le bouton lorsque l'on clique dessus
 
-            for (JButton tuilebutton : view.tuile) {
+            for (JButton tuilebutton : view.tuilesFabriques) {
                 if (e.getSource() == tuilebutton) {
                     System.out.println(tuilebutton);
                 }

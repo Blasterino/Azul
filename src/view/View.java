@@ -13,10 +13,9 @@ public class View extends JFrame {
     Model model;
 
   //  JButton[] boutonBijoux = new JButton[8][8];
-    public JButton[] tuile;
+    public JButton[] tuile,tuilesFabriques;
 
-
-    JPanel[] fabrique;
+    JPanel[] fabriques;
     JLabel penalite, score;
     ArrayList<JLabel> listScoreJoueurView, listPenaliteJoueurView;
 
@@ -46,8 +45,9 @@ public class View extends JFrame {
     public void initAttribut() {
         // Initialisation des attributs
         actionListener = new ControlButton(this, model);
-        fabrique =  new JPanel[model.getNombreFabriqueGame()];
+        fabriques =  new JPanel[model.getNombreFabriqueGame()];
         tuile =  new JButton[4];
+        tuilesFabriques = new JButton[4*model.getNombreFabriqueGame()];
         fullView = new JPanel();
         listPenaliteJoueurView = new ArrayList<>();
         listScoreJoueurView = new ArrayList<>();
@@ -83,18 +83,20 @@ public class View extends JFrame {
 
         middle = new JPanel(new GridLayout(3,3,100,100));
         for (int i = 0; i < model.getNombreFabriqueGame(); i++) {
-            fabrique[i] = new JPanel();
+            fabriques[i] = new JPanel();
            // fabrique[i].addActionListener(actionListener); // ajouter l'écouteur aux
-            fabrique[i].setBackground(Color.orange);
+            fabriques[i].setBackground(Color.orange);
             for(int j=0;j<4; j++){
                 tuile[j] = new JButton();
-                //j'ajoute sur chaque bouton (tuiles) l'image de la tuile adéquat
                 tuile[j].addActionListener(actionListener);
+                System.out.println("ajout");
+                //j'ajoute sur chaque bouton (tuiles) l'image de la tuile adéquat
                 tuile[j].setIcon(new ImageIcon("Resources/"+model.getSacPioche().piocherUneTuileDuSac().getCouleurTuile().getImageTuile()));
-                fabrique[i].add(tuile[j]);
+                fabriques[i].add(tuile[j]);
+                tuilesFabriques[4*i+j] = tuile[j];
             }
 
-            middle.add(fabrique[i]);
+            middle.add(fabriques[i]);
         }
 
 
