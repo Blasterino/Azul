@@ -8,11 +8,21 @@ public class Plateau {
     // A faire plus tard, avec les images,affichage, interactions tout ça tout ça
     ArrayList<Tuile> penalite;
     private int pointDuJoueur;
+    private ArrayList<Tuile> mainActuelle;
 
 
     public Plateau() {
         penalite = new ArrayList<>();
         pointDuJoueur = 0;
+        mainActuelle = new ArrayList<>();
+    }
+
+    public void addPenalite(Tuile tuile){
+        penalite.add(tuile);
+    }
+
+    public int getTaillePenalite(){
+        return penalite.size();
     }
 
 
@@ -65,13 +75,19 @@ public class Plateau {
         }
     }
 
-
-
     public int getPointDuJoueur() {
         return pointDuJoueur;
     }
 
     public void setPointDuJoueur(int pointDuJoueur) {
         this.pointDuJoueur = pointDuJoueur;
+    }
+
+    public void addTuileInMain(Tuile tuile){
+        mainActuelle.add(tuile);
+    }
+
+    public void clearMainActuelle(){
+        mainActuelle.clear();
     }
 }

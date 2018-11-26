@@ -2,19 +2,31 @@ package model;
 
 import java.util.ArrayList;
 
+//Petit rond sur lequel on pose les tuiles
 public class Fabrique {
-    // petit rond sur lequels on pose les fabrique
-    ArrayList<Tuile> tuileOnFabrique;
+    public ArrayList<Tuile> tuilesOnFabrique;
 
     public Fabrique() {
-        tuileOnFabrique = new ArrayList<>();
+        tuilesOnFabrique = new ArrayList<>(4);
     }
 
-    public ArrayList<Tuile> getTuileOnFabrique() {
-        return tuileOnFabrique;
+    public ArrayList<Tuile> getTuilesOnFabrique() {
+        return tuilesOnFabrique;
     }
 
-    public void setTuileOnFabrique(ArrayList<Tuile> tuileOnFabrique) {
-        this.tuileOnFabrique = tuileOnFabrique;
+    public void setTuilesOnFabrique(ArrayList<Tuile> tuiles){
+        tuilesOnFabrique = tuiles;
+    }
+
+    public void addTuile(Tuile tuile){
+        tuilesOnFabrique.add(tuile);
+    }
+
+    public void removeTuile(Tuile tuile){
+        tuilesOnFabrique.remove(tuile);
+    }
+
+    public void clearTuilesOnFabrique(){
+        tuilesOnFabrique.clear();
     }
 }

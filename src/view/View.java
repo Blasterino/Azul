@@ -1,6 +1,6 @@
 package view;
 
-import controller.ControlButton;
+/*import controller.ControlButton;
 import model.Model;
 import model.Plateau;
 
@@ -10,17 +10,17 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class View extends JFrame {
-    Model model;
+    private Model model;
 
   //  JButton[] boutonBijoux = new JButton[8][8];
-    public JButton[] tuile,tuilesFabriques;
-    public JButton tuilePremierJoueur;
+    private JButton[] tuile,tuilesFabriques;
+    private JButton tuilePremierJoueur;
 
-    JPanel[] fabriques;
-    JLabel penalite, score;
+    private JPanel[] fabriques;
+    private JLabel penalite, score;
     ArrayList<JLabel> listScoreJoueurView, listPenaliteJoueurView;
 
-    JPanel fullView, middle, centreTable;
+    private JPanel fullView, middle, centreTable, PanelMainJoueur;
 
     protected ActionListener actionListener;
 
@@ -31,44 +31,37 @@ public class View extends JFrame {
         this.model = m;
         initAttribut();
         addWidget();
+
         setSize(1280, 720);
         setTitle("Azul");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void setControlButton(ActionListener cb) {
-        //mise en place des différents controller de bouton
-        // exemple         jbbutton.addActionListener(cb);
-        for (JButton tuileButton : tuile)
-            tuileButton.addActionListener(cb);
-    }
-
     public void initAttribut() {
         // Initialisation des attributs
-        actionListener = new ControlButton(this, model);
-        fabriques =  new JPanel[model.getNombreFabriqueGame()];
-        centreTable = new JPanel();
-        tuile =  new JButton[4];
-        tuilesFabriques = new JButton[4*model.getNombreFabriqueGame()];
         fullView = new JPanel();
-        listPenaliteJoueurView = new ArrayList<>();
+        actionListener = new ControlButton(this, model);
+
         listScoreJoueurView = new ArrayList<>();
-
-
         for(Plateau joueurs : model.getListJoueurs()){
             score = new JLabel(String.valueOf(joueurs.getPointDuJoueur()));
             listScoreJoueurView.add(score);
         }
 
+        centreTable = new JPanel();
+        fabriques =  new JPanel[model.getNombreFabriqueGame()];
+        tuilesFabriques = new JButton[4*model.getNombreFabriqueGame()];
+        tuile =  new JButton[4];
+
+        PanelMainJoueur = new JPanel(new GridLayout(4, 1, 10, 10));
+
+        listPenaliteJoueurView = new ArrayList<>();
         for(Plateau joueurs : model.getListJoueurs()){
             // penalite = new JLabel(String.valueOf(joueurs.getPointDePenaliteActuel()));
             penalite = new JLabel("Missing value");
             listPenaliteJoueurView.add(penalite);
         }
     }
-
-
-
 
 
     public void addWidget() {
@@ -126,12 +119,18 @@ public class View extends JFrame {
 
     }
 
-
-
     //Affichage de la vue
     public void display(){
         this.setVisible(true);
     }
 
 
-}
+    public void setControlButton(ActionListener cb) {
+        //mise en place des différents controller de bouton
+        // exemple         jbbutton.addActionListener(cb);
+        for (JButton tuileButton : tuile)
+            tuileButton.addActionListener(cb);
+    }
+
+
+}*/

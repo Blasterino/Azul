@@ -1,4 +1,5 @@
 import controller.ControlGroup;
+import model.Model;
 
 public class Main {
 
@@ -6,7 +7,9 @@ public class Main {
        // On lance le jeux ici
         javax.swing.SwingUtilities.invokeLater( new Runnable() {
             public void run() {
-                ControlGroup control = new ControlGroup();
+                //ControlGroup control = new ControlGroup();
+                Model model = new Model(3);
+                ControlGroup control = new ControlGroup(model);
             }
         });
 
