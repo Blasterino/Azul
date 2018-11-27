@@ -1,12 +1,12 @@
 package model;
 
 public enum CouleurTuile {
-    BLEU("BLEU","imageTuileBleu"),
-    ROUGE("ROUGE","imageTuileRouge"),
-    VERT("VERT","imageTuileVert"),
-    JAUNE("JAUNE","imageTuileJaune"),
-    NOIR("NOIR","imageTuileNoir"),
-    PREMIERJOUEUR("PREMIERJOUEUR","imagePremierJoueur");
+    BLEU("BLEU","imageTuileBleu.png"),
+    ROUGE("ROUGE","imageTuileRouge.png"),
+    BLANC("BLANC","imageTuileBlanche.png"),
+    JAUNE("JAUNE","imageTuileJaune.png"),
+    NOIR("NOIR","imageTuileNoir.png"),
+    PREMIERJOUEUR("PREMIERJOUEUR","imagePremierJoueur.png");
 
     String couleurTuile;
     String imageTuile;

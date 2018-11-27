@@ -1,6 +1,6 @@
 package view;
 
-import controller.ControlButton;
+/*import controller.ControlButton;
 import model.Model;
 import model.Plateau;
 
@@ -10,16 +10,17 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class View extends JFrame {
-    Model model;
+    private Model model;
 
   //  JButton[] boutonBijoux = new JButton[8][8];
-    JButton[] fabrique;
+    private JButton[] tuile,tuilesFabriques;
+    private JButton tuilePremierJoueur;
 
-
-    JLabel penalite, score;
+    private JPanel[] fabriques;
+    private JLabel penalite, score;
     ArrayList<JLabel> listScoreJoueurView, listPenaliteJoueurView;
 
-    JPanel fullView, middle;
+    private JPanel fullView, middle, centreTable, PanelMainJoueur;
 
     protected ActionListener actionListener;
 
@@ -30,38 +31,37 @@ public class View extends JFrame {
         this.model = m;
         initAttribut();
         addWidget();
+
         setSize(1280, 720);
         setTitle("Azul");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void setControlButton(ActionListener cb) {
-        //mise en place des différents controller de bouton
-        // exemple         jbbutton.addActionListener(cb);
-    }
-
     public void initAttribut() {
         // Initialisation des attributs
-        actionListener = new ControlButton(this, model);
-        fabrique =  new JButton[model.getNombreFabriqueGame()];
         fullView = new JPanel();
-        listPenaliteJoueurView = new ArrayList<>();
-        listScoreJoueurView = new ArrayList<>();
+        actionListener = new ControlButton(this, model);
 
+        listScoreJoueurView = new ArrayList<>();
         for(Plateau joueurs : model.getListJoueurs()){
             score = new JLabel(String.valueOf(joueurs.getPointDuJoueur()));
             listScoreJoueurView.add(score);
         }
 
+        centreTable = new JPanel();
+        fabriques =  new JPanel[model.getNombreFabriqueGame()];
+        tuilesFabriques = new JButton[4*model.getNombreFabriqueGame()];
+        tuile =  new JButton[4];
+
+        PanelMainJoueur = new JPanel(new GridLayout(4, 1, 10, 10));
+
+        listPenaliteJoueurView = new ArrayList<>();
         for(Plateau joueurs : model.getListJoueurs()){
             // penalite = new JLabel(String.valueOf(joueurs.getPointDePenaliteActuel()));
             penalite = new JLabel("Missing value");
             listPenaliteJoueurView.add(penalite);
         }
     }
-
-
-
 
 
     public void addWidget() {
@@ -78,11 +78,27 @@ public class View extends JFrame {
 
         middle = new JPanel(new GridLayout(3,3,100,100));
         for (int i = 0; i < model.getNombreFabriqueGame(); i++) {
-            fabrique[i] = new JButton();
-            fabrique[i].addActionListener(actionListener); // ajouter l'écouteur aux
-            fabrique[i].setIcon(new ImageIcon("Resources/ImageFabrique.png"));
-            middle.add(fabrique[i]);
+            fabriques[i] = new JPanel();
+           // fabrique[i].addActionListener(actionListener); // ajouter l'écouteur aux
+            fabriques[i].setBackground(Color.orange);
+            for(int j=0;j<4; j++){
+                tuile[j] = new JButton();
+                tuile[j].addActionListener(actionListener);
+                //j'ajoute sur chaque bouton (tuiles) l'image de la tuile adéquat
+                tuile[j].setIcon(new ImageIcon("Resources/"+model.getSacPioche().piocherUneTuileDuSac().getCouleurTuile().getImageTuile()));
+                fabriques[i].add(tuile[j]);
+                tuilesFabriques[4*i+j] = tuile[j];
+            }
+
+            middle.add(fabriques[i]);
         }
+        //création du milieu de la table
+        centreTable.setBackground(Color.red);
+        tuilePremierJoueur = new JButton();
+        tuilePremierJoueur.setIcon(new ImageIcon( "Resources/"+model.getTuilePremierJoueur().getCouleurTuile().getImageTuile()));
+        tuilePremierJoueur.addActionListener(actionListener);
+        centreTable.add(tuilePremierJoueur);
+        middle.add(centreTable);
 
 
         JPanel bottom = new JPanel();
@@ -109,4 +125,12 @@ public class View extends JFrame {
     }
 
 
-}
+    public void setControlButton(ActionListener cb) {
+        //mise en place des différents controller de bouton
+        // exemple         jbbutton.addActionListener(cb);
+        for (JButton tuileButton : tuile)
+            tuileButton.addActionListener(cb);
+    }
+
+
+}*/

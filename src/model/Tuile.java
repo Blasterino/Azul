@@ -3,6 +3,10 @@ package model;
 public class Tuile {
     CouleurTuile couleurTuile;
 
+    public Tuile() {
+        couleurTuile = null;
+    }
+
     public Tuile(CouleurTuile couleurTuile) {
         this.couleurTuile = couleurTuile;
     }
