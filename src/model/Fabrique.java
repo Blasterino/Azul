@@ -26,7 +26,13 @@ public class Fabrique {
         tuilesOnFabrique.remove(tuile);
     }
 
+    public boolean isFabriqueVide(){
+        return tuilesOnFabrique.isEmpty();
+    }
+
     public void clearTuilesOnFabrique(){
         tuilesOnFabrique.clear();
     }
+
+
 }

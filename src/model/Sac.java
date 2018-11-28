@@ -60,4 +60,5 @@ public class Sac {
     public static int getNombreDeTuileMaxParCouleur() {
         return nombreDeTuileMaxParCouleur;
     }
+
 }

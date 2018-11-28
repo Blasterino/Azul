@@ -25,7 +25,7 @@ public class Vue extends JFrame{
     public JLabel[] JLabelScores;
 
     public JPanel[] JPanelFabriques;
-    public JButton[][] JButtonTuilesInFabriques;
+    public JButton[][] JButtonTuilesInFabriques,JButtonTuilesLigneMotif;
     public JPanel JPanelMarqueurPremier;
     public JButton JButtonMarqueurPremier;
     public JPanel JPanelCentreTable;
@@ -70,6 +70,7 @@ public class Vue extends JFrame{
             }
         }
 
+
         //Centre de table
         JPanelCentreTable = new JPanel();
         //Marqueur 1er joueur
@@ -84,7 +85,15 @@ public class Vue extends JFrame{
             JButtonMainJoueur[i-1] = new JButton("Tuile " + i);
         }
 
-        //LIGNE MOTIF
+        //LIGNE MOTIF*
+        JButtonTuilesLigneMotif = new JButton[5][5];
+        for(int i=0; i<5;i++){
+            for(int j=0; j<i+1;j++) {
+                JButtonTuilesLigneMotif[i][j] = new JButton("ligne : " + i + " tuiles : " + j);
+                JButtonTuilesLigneMotif[i][j].setPreferredSize(new Dimension(40, 40));
+
+            }
+        }
         //MUR
 
         //PENALITES
@@ -131,6 +140,15 @@ public class Vue extends JFrame{
         }
 
         //LIGNE MOTIFS
+
+        JPanelLigneMotif.setLayout(new GridLayout(5,5,10,10));
+        for(int i= 0; i <5; i++){
+            for(int j=0; j<i+1;j++)
+            JPanelLigneMotif.add(JButtonTuilesLigneMotif[i][j]);
+        }
+
+
+
         //MUR
 
         //PENALITES
@@ -160,6 +178,11 @@ public class Vue extends JFrame{
         //CONTROL DES TUILES DE LA MAIN DU JOUEUR
         for(int i = 0 ; i < 4 ; i++){
             JButtonMainJoueur[i].addActionListener(cb);
+        }
+
+        for(int i= 0; i <5; i++){
+            for(int j=0; j<i+1;j++)
+                JButtonTuilesLigneMotif[i][j].addActionListener(cb);
         }
     }
 }

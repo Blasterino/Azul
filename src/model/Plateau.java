@@ -87,7 +87,24 @@ public class Plateau {
         mainActuelle.add(tuile);
     }
 
+    public ArrayList<Tuile> getPenalite() {
+        return penalite;
+    }
+
+    public void setPenalite(ArrayList<Tuile> penalite) {
+        this.penalite = penalite;
+    }
+
+    public ArrayList<Tuile> getMainActuelle() {
+        return mainActuelle;
+    }
+
+    public void setMainActuelle(ArrayList<Tuile> mainActuelle) {
+        this.mainActuelle = mainActuelle;
+    }
+
     public void clearMainActuelle(){
         mainActuelle.clear();
     }
+
 }

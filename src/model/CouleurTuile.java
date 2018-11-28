@@ -42,4 +42,5 @@ public enum CouleurTuile {
     public void setCouleurTuile(String couleurTuile) {
         this.couleurTuile = couleurTuile;
     }
+
 }

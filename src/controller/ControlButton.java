@@ -16,29 +16,6 @@ import java.util.ArrayList;
 
 public class ControlButton implements ActionListener {
 
-    /*View view;
-    Model model;
-
-    public ControlButton(View v, Model m) {
-        this.view = v;
-        this.model = m;
-    }*/
-
-    /*public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof JButton) {
-            // contenu de ce que doit faire le bouton lorsque l'on clique dessus
-            if(e.getSource() == view.tuilePremierJoueur){
-                System.out.println("Tuile premier joueur");
-            }
-            for (JButton tuilebutton : view.tuilesFabriques) {
-                if (e.getSource() == tuilebutton) {
-                    System.out.println(tuilebutton);
-                }
-
-            }
-        }
-    }*/
-
     private Model model;
     private Vue vue;
 
@@ -53,13 +30,16 @@ public class ControlButton implements ActionListener {
         if(e.getSource() instanceof JButton){
             for(int i = 0 ; i < vue.JButtonTuilesInFabriques.length ; i++){
                 ArrayList<Tuile> tuilesRecup = new ArrayList<>(4);
+                Tuile tuileChoisie = new Tuile();
                 //Récupération de la tuile choisie
                 for(int j = 0 ; j < 4 ; j++){
                     if(e.getSource() == vue.JButtonTuilesInFabriques[i][j]){
-                        Tuile tuileChoisie = model.getFabriques()[i].getTuilesOnFabrique().get(j);
-                        tuilesRecup.add(tuileChoisie);
-                        model.getFabriques()[i].removeTuile(tuileChoisie);
-                        vue.JPanelFabriques[i].setVisible(false);
+                        if(!model.getFabriques()[i].isFabriqueVide()) {
+                            tuileChoisie = model.getFabriques()[i].getTuilesOnFabrique().get(j);
+                            tuilesRecup.add(tuileChoisie);
+                            model.getFabriques()[i].removeTuile(tuileChoisie);
+                            vue.JPanelFabriques[i].setVisible(false);
+                        }
                     }
                 }
 
@@ -83,7 +63,7 @@ public class ControlButton implements ActionListener {
                 //Ajout dans la main des tuiles
                 int compteur = 0;
                 for(Tuile tuile : tuilesRecup){
-                    model.getListJoueurs().get(0).addTuileInMain(tuile);
+                    model.getListJoueurs().get(0).addTuileInMain(tuile); // 0 Car on a actuellement que 1 joueurs
                     vue.JButtonMainJoueur[compteur].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                     vue.JButtonMainJoueur[compteur].setText("");
                     compteur++;
@@ -93,8 +73,10 @@ public class ControlButton implements ActionListener {
                 for(int j = 0 ; j < 4 ; j++){
                     vue.JButtonTuilesInFabriques[i][j].setEnabled(false);
                 }
+                model.setJoueurAvecTuileEnMain(true);
 
             }
+
 
             for(int i = 0 ; i < vue.JButtonMainJoueur.length ; i++){
                 if(e.getSource() == vue.JButtonMainJoueur[i]){
@@ -102,6 +84,8 @@ public class ControlButton implements ActionListener {
                 }
             }
 
+
+            // partie tuile premier joueur
             if(e.getSource() == vue.JButtonMarqueurPremier){
                 System.out.println("Marqueur 1er");
                 model.getListJoueurs().get(0).addPenalite(new Tuile(CouleurTuile.PREMIERJOUEUR));
@@ -113,6 +97,46 @@ public class ControlButton implements ActionListener {
                 vue.JPanelMarqueurPremier.setVisible(false);
                 vue.JPanelMainJoueur.add(new JLabel("Marqueur 1er joueur"));
             }
+
+
+            // de la main vers la ligne de motif
+            for(int i=0; i< 5 ; i++){
+                for(int j=0; j< i+1; j++){
+                    if(e.getSource() == vue.JButtonTuilesLigneMotif[i][j]){
+                        if(model.isJoueurAvecTuileEnMain()){
+                            int tampon = 0;
+                            for(Tuile tuile : model.getListJoueurs().get(0).getMainActuelle()){
+
+                                vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                vue.JButtonTuilesLigneMotif[i][tampon].setText("");
+
+
+                                tampon++;
+
+
+                                model.setJoueurAvecTuileEnMain(false);
+                            }
+                            model.getListJoueurs().get(0).getMainActuelle().clear();
+                            for(int n=0; n<4; n++){
+                                vue.JButtonMainJoueur[n].setIcon(null);
+                                vue.JButtonMainJoueur[n].setText("Tuile "+ n);
+                            }
+
+                            for(int p = 0 ; p < model.getNombreFabriqueGame() ; p++){
+                                for(int q = 0 ; q < 4 ; q++) {
+                                    vue.JButtonTuilesInFabriques[p][q].setEnabled(true);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+
+
+
+
         }
+
     }
 }

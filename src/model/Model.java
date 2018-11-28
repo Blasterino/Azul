@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Model {
+    boolean joueurAvecTuileEnMain;
     int nombreJoueur;
     ArrayList<Plateau> listJoueurs;
 
@@ -22,7 +23,8 @@ public class Model {
             Plateau joueur = new Plateau();
             listJoueurs.add(joueur);
         }
-
+        //variable utilisé
+        joueurAvecTuileEnMain = false;
         // Création pioche et défausse
         sacPioche= new Sac();
         defausse= new Sac();
@@ -107,5 +109,13 @@ public class Model {
 
     public void setSacPioche(Sac sacPioche) {
         this.sacPioche = sacPioche;
+    }
+
+    public boolean isJoueurAvecTuileEnMain() {
+        return joueurAvecTuileEnMain;
+    }
+
+    public void setJoueurAvecTuileEnMain(boolean joueurAvecTuileEnMain) {
+        this.joueurAvecTuileEnMain = joueurAvecTuileEnMain;
     }
 }
