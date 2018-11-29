@@ -185,4 +185,13 @@ public class Vue extends JFrame{
                 JButtonTuilesLigneMotif[i][j].addActionListener(cb);
         }
     }
+
+    public void actualiseVueLigneDeMotif(){
+        for(int i = 0; i<5; i++){
+            for(int j = 0 ; j<5; j ++){
+                this.JButtonTuilesLigneMotif[i][j].setIcon(new ImageIcon( model.getListJoueurs().get(0).getLigneDeMotif()[i][j].getCouleurTuile().getImageTuile()));
+            }
+        }
+
+    }
 }

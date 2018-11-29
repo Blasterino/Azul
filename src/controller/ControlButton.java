@@ -58,6 +58,7 @@ public class ControlButton implements ActionListener {
                         tuileRest.setIcon(new ImageIcon(tuile.getCouleurTuile().getImageTuile()));
                         vue.JPanelCentreTable.add(tuileRest);
                     }
+                    model.getFabriques()[i].clearTuilesOnFabrique();
                 }
 
                 //Ajout dans la main des tuiles
@@ -69,7 +70,6 @@ public class ControlButton implements ActionListener {
                     compteur++;
                 }
 
-                model.getFabriques()[i].clearTuilesOnFabrique();
                 for(int j = 0 ; j < 4 ; j++){
                     vue.JButtonTuilesInFabriques[i][j].setEnabled(false);
                 }

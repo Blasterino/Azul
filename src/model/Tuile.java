@@ -19,6 +19,17 @@ public class Tuile {
         this.couleurTuile = couleurTuile;
     }
 
+    public boolean isColorNull(){
+        if(this.couleurTuile ==null )
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
     @Override
     public String toString() {
         return "Tuile{" +

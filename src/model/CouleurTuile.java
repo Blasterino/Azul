@@ -21,6 +21,8 @@ public enum CouleurTuile {
     }
 
     public String getImageTuile() {
+        if(imageTuile == null)
+            return "imageTuileVide.png";
         return imageTuile;
     }
 

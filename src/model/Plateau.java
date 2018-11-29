@@ -9,12 +9,32 @@ public class Plateau {
     ArrayList<Tuile> penalite;
     private int pointDuJoueur;
     private ArrayList<Tuile> mainActuelle;
+    private Tuile[][] ligneDeMotif;
 
 
     public Plateau() {
         penalite = new ArrayList<>();
         pointDuJoueur = 0;
         mainActuelle = new ArrayList<>();
+        ligneDeMotif = new Tuile[5][5];
+
+        for(int i = 0; i<5; i ++){
+            for(int j = 0; j<5;j++)
+                ligneDeMotif[i][j] = new Tuile();
+        }
+    }
+
+    public Tuile[][] getLigneDeMotif() {
+        return ligneDeMotif;
+    }
+    public boolean isLigneSpecifiqueVide(int ligne){
+        if(this.ligneDeMotif[ligne][0].isColorNull())
+            return true;
+        return false;
+    }
+
+    public void setLigneDeMotif(Tuile[][] ligneDeMotif) {
+        this.ligneDeMotif = ligneDeMotif;
     }
 
     public void addPenalite(Tuile tuile){
