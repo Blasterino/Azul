@@ -9,7 +9,8 @@ public class Plateau {
     ArrayList<Tuile> penalite;
     private int pointDuJoueur;
     private ArrayList<Tuile> mainActuelle;
-    private Tuile[][] ligneDeMotif;
+    public Tuile[][] ligneDeMotif;
+
 
 
     public Plateau() {
@@ -29,6 +30,12 @@ public class Plateau {
     }
     public boolean isLigneSpecifiqueVide(int ligne){
         if(this.ligneDeMotif[ligne][0].isColorNull())
+            return true;
+        return false;
+    }
+
+    public boolean isEmplacementLigneSpecifiqueVide(int ligne,int emplacement){
+        if(this.ligneDeMotif[ligne][emplacement].isColorNull())
             return true;
         return false;
     }
@@ -126,5 +133,6 @@ public class Plateau {
     public void clearMainActuelle(){
         mainActuelle.clear();
     }
+
 
 }

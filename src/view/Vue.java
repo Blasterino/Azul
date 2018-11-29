@@ -62,10 +62,11 @@ public class Vue extends JFrame{
         //Créations des tuiles par fabrique
         JButtonTuilesInFabriques = new JButton[model.getFabriques().length][4];
         for(int i = 0 ; i < JPanelFabriques.length ; i++){
-            Fabrique fabrique = model.getFabriques()[i];
+           // Fabrique fabrique = model.getFabriques()[i];
             for(int j = 0 ; j < 4 ; j++){
                 JButtonTuilesInFabriques[i][j] = new JButton();
-                JButtonTuilesInFabriques[i][j].setIcon(new ImageIcon("Resources/" + fabrique.getTuilesOnFabrique().get(j).getCouleurTuile().getImageTuile()));
+                JButtonTuilesInFabriques[i][j].setIcon(new ImageIcon("Resources/" + model.getFabriques()[i].getTuilesOnFabrique().get(j).getCouleurTuile().getImageTuile()));
+             //   JButtonTuilesInFabriques[i][j].setIcon(new ImageIcon("Resources/" + fabrique.getTuilesOnFabrique().get(j).getCouleurTuile().getImageTuile()));
                 JButtonTuilesInFabriques[i][j].setPreferredSize(new Dimension(40, 40));
             }
         }

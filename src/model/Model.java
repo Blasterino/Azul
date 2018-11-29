@@ -118,4 +118,5 @@ public class Model {
     public void setJoueurAvecTuileEnMain(boolean joueurAvecTuileEnMain) {
         this.joueurAvecTuileEnMain = joueurAvecTuileEnMain;
     }
+
 }

@@ -106,16 +106,18 @@ public class ControlButton implements ActionListener {
                         if(model.isJoueurAvecTuileEnMain()){
                             int tampon = 0;
                             for(Tuile tuile : model.getListJoueurs().get(0).getMainActuelle()){
+                                if(model.getListJoueurs().get(0).isEmplacementLigneSpecifiqueVide(i,tampon) && model.isJoueurAvecTuileEnMain()){
+                                    vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                    vue.JButtonTuilesLigneMotif[i][tampon].setText("");
 
-                                vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-                                vue.JButtonTuilesLigneMotif[i][tampon].setText("");
-
-
-                                tampon++;
-
-
-                                model.setJoueurAvecTuileEnMain(false);
+                                    model.getListJoueurs().get(0).ligneDeMotif[i][tampon] = tuile;
+                                    tampon++;
+                                }
+                                else {
+                                    System.out.println("TU PEUX PAS FDP");
+                                }
                             }
+                            model.setJoueurAvecTuileEnMain(false);
                             model.getListJoueurs().get(0).getMainActuelle().clear();
                             for(int n=0; n<4; n++){
                                 vue.JButtonMainJoueur[n].setIcon(null);
