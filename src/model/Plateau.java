@@ -29,9 +29,7 @@ public class Plateau {
         return ligneDeMotif;
     }
     public boolean isLigneSpecifiqueVide(int ligne){
-        if(this.ligneDeMotif[ligne][0].isColorNull())
-            return true;
-        return false;
+        return (this.ligneDeMotif[ligne][0].isColorNull());
     }
 
     public boolean isEmplacementLigneSpecifiqueVide(int ligne,int emplacement){

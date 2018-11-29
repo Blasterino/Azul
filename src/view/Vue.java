@@ -21,8 +21,9 @@ public class Vue extends JFrame{
     protected JPanel JPanelPenalites;
     protected JLabel JLabelMur;
     private JLabel JLabelLigneMotif;
+    protected JPanel JPanelPlancher;
 
-    public JLabel[] JLabelScores;
+    public JLabel[] JLabelScores,JLabelPlancher;
 
     public JPanel[] JPanelFabriques;
     public JButton[][] JButtonTuilesInFabriques,JButtonTuilesLigneMotif;
@@ -97,6 +98,14 @@ public class Vue extends JFrame{
         }
         //MUR
 
+        //PLANCHER
+        JPanelPlancher = new JPanel();
+        JLabelPlancher = new JLabel[7];
+        for(int i = 0; i < 7; i++){
+            JLabelPlancher[i] = new JLabel();
+            JPanelPlancher.add(JLabelPlancher[i]);
+        }
+
         //PENALITES
         JLabelPenalites = new JLabel[model.getNombreJoueur()];
         for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
@@ -151,6 +160,12 @@ public class Vue extends JFrame{
 
 
         //MUR
+
+        //PLANCHER
+        JPanelPlancher.setLayout(new GridLayout(1,7));
+        for(int i = 0; i < 7; i++){
+            JPanelPlancher.add(JLabelPlancher[i]);
+        }
 
         //PENALITES
         JPanelPenalites.setLayout(new GridLayout(1, model.getNombreJoueur(), 10, 10));

@@ -94,8 +94,9 @@ public class ControlButton implements ActionListener {
                 for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
                     vue.JLabelPenalites[i-1].setText("Pénalités du joueur " + i + " : " + model.getListJoueurs().get(i-1).getTaillePenalite());
                 }
+                vue.JLabelPlancher[model.getListJoueurs().get(0).getPenalite().size()].setText("Marqueur du premier joueur");
                 vue.JPanelMarqueurPremier.setVisible(false);
-                vue.JPanelMainJoueur.add(new JLabel("Marqueur 1er joueur"));
+
             }
 
 
@@ -104,17 +105,35 @@ public class ControlButton implements ActionListener {
                 for(int j=0; j< i+1; j++){
                     if(e.getSource() == vue.JButtonTuilesLigneMotif[i][j]){
                         if(model.isJoueurAvecTuileEnMain()){
+
                             int tampon = 0;
                             for(Tuile tuile : model.getListJoueurs().get(0).getMainActuelle()){
-                                if(model.getListJoueurs().get(0).isEmplacementLigneSpecifiqueVide(i,tampon) && model.isJoueurAvecTuileEnMain()){
-                                    vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-                                    vue.JButtonTuilesLigneMotif[i][tampon].setText("");
 
-                                    model.getListJoueurs().get(0).ligneDeMotif[i][tampon] = tuile;
+                                if(model.getListJoueurs().get(0).isEmplacementLigneSpecifiqueVide(i,tampon) && model.isJoueurAvecTuileEnMain()){
+
+                                    if(tuile.equals(model.getTuilePremierJoueur())){
+
+                                        model.getListJoueurs().get(0).addPenalite(model.getTuilePremierJoueur());
+                                        vue.JLabelPlancher[model.getListJoueurs().get(0).getPenalite().size()].setText("Marqueur du premier joueur");
+                                    } else {
+
+                                        if(tampon+1 > i+1){
+                                            vue.JLabelPlancher[model.getListJoueurs().get(0).getPenalite().size()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                            model.getListJoueurs().get(0).addPenalite(model.getListJoueurs().get(0).getMainActuelle().get(tampon));
+                                        } else {
+
+                                            vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                            vue.JButtonTuilesLigneMotif[i][tampon].setText("");
+
+                                            model.getListJoueurs().get(0).ligneDeMotif[i][tampon] = tuile;
+                                        }
+
+                                    }
+
                                     tampon++;
                                 }
                                 else {
-                                    System.out.println("TU PEUX PAS FDP");
+                                    System.out.println("Vous ne pouvez pas");
                                 }
                             }
                             model.setJoueurAvecTuileEnMain(false);
