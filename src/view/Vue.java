@@ -35,19 +35,32 @@ public class Vue extends JFrame{
 
     public JLabel[] JLabelPenalites;
 
+    public JButton JButtonJouerMenu;
+    public JButton JButtonRegles;
+    public JButton JButtonQuitter;
+    public JButton JButtonRetourMenu;
+    public JLabel JLabelRegles;
+    public JPanel JPanelMenu;
+    public JPanel JPanelRules;
+    public JFrame newGameFrame;
+    public JFrame newRulesFrame;
+
     public Vue(Model model){
         this.model = model;
-
         initAttribut();
-        setContentPane(JPanelBase);
         addWidgets();
-
-        setSize(1280, 720);
-        setTitle("Azul");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        creatingMenuFrame();
     }
 
     private void initAttribut(){
+        //MENU
+        JButtonJouerMenu = new JButton("Jouer");
+        JButtonRegles = new JButton("Regles");
+        JButtonQuitter = new JButton("Quitter");
+        JButtonRetourMenu = new JButton("Retour au menu");
+        JLabelRegles = new JLabel("ici les regles");
+        JPanelMenu = new JPanel();
+        JPanelRules = new JPanel();
         //SCORES
         JLabelScores = new JLabel[model.getNombreJoueur()];
         for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
@@ -114,6 +127,14 @@ public class Vue extends JFrame{
     }
 
     private void addWidgets(){
+        //MENU
+        JPanelMenu.setLayout(new GridLayout(3,1,50,50));
+        JPanelMenu.add(JButtonJouerMenu);
+        JPanelMenu.add(JButtonRegles);
+        JPanelMenu.add(JButtonQuitter);
+
+        JPanelRules.add(JLabelRegles);
+        JPanelRules.add(JButtonRetourMenu);
         //SCORE
         JPanelScore.setLayout(new GridLayout(1, model.getNombreJoueur(), 10, 10));
         for(int i = 0 ; i < model.getNombreJoueur() ; i++){
@@ -178,6 +199,32 @@ public class Vue extends JFrame{
         setVisible(true);
     }
 
+    public void creatingGameFrame(){
+        newGameFrame = new JFrame();
+        newGameFrame.add(JPanelBase);
+        System.out.println(getContentPane());
+        setContentPane(JPanelBase);
+        setSize(1280, 720);
+        setTitle("Azul");
+        setDefaultCloseOperation(newGameFrame.EXIT_ON_CLOSE);
+        System.out.println(getContentPane());
+    }
+    public void  creatingRulesFrame(){
+        newRulesFrame = new JFrame();
+        newRulesFrame.add(JPanelRules);
+        setContentPane(JPanelRules);
+        setSize(1280, 720);
+        setTitle("Regles Azul");
+        setDefaultCloseOperation(newRulesFrame.EXIT_ON_CLOSE);
+    }
+    public void creatingMenuFrame(){
+        add(JPanelMenu);
+        setContentPane(JPanelMenu);
+        setSize(1280, 720);
+        setTitle("Menu");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
     public void setControlButton(ActionListener cb){
         //CONTROL DES TUILES DU CENTRE DE LA TABLE
         int tampon = 0;
@@ -200,6 +247,10 @@ public class Vue extends JFrame{
             for(int j=0; j<i+1;j++)
                 JButtonTuilesLigneMotif[i][j].addActionListener(cb);
         }
+        JButtonJouerMenu.addActionListener(cb);
+        JButtonRegles.addActionListener(cb);
+        JButtonRetourMenu.addActionListener(cb);
+        JButtonQuitter.addActionListener(cb);
     }
 
     public void actualiseVueLigneDeMotif(){

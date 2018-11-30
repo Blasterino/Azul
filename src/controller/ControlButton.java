@@ -156,7 +156,19 @@ public class ControlButton implements ActionListener {
 
 
 
-
+            if (e.getSource() == vue.JButtonJouerMenu){
+                System.out.println("appui bouton jouer");
+                vue.creatingGameFrame();
+            }
+            if (e.getSource() == vue.JButtonRegles){
+                vue.creatingRulesFrame();
+            }
+            if (e.getSource() == vue.JButtonRetourMenu){
+                vue.creatingMenuFrame();
+            }
+            if (e.getSource() == vue.JButtonQuitter){
+                vue.dispose();
+            }
         }
 
     }
