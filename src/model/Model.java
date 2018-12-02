@@ -8,7 +8,7 @@ public class Model {
     ArrayList<Plateau> listJoueurs;
 
     Fabrique[] fabriques;
-    ArrayList<Object> centreTable;
+    CentreTable centreTable;
     Sac sacPioche;
     Sac defausse;
     Tuile tuilePremierJoueur;
@@ -30,7 +30,7 @@ public class Model {
         defausse= new Sac();
 
         // Création centre de la table
-        centreTable = new ArrayList<>();
+        centreTable = new CentreTable();
         //Création fabriques
         fabriques = new Fabrique[getNombreFabriqueGame()];
 
@@ -41,8 +41,7 @@ public class Model {
         initialisationFabriques();
 
         //Initialisation du centre
-        centreTable.add(fabriques);
-        centreTable.add(new Tuile(CouleurTuile.PREMIERJOUEUR));
+        centreTable.addTuile(new Tuile(CouleurTuile.PREMIERJOUEUR));
 
     }
 
@@ -91,7 +90,7 @@ public class Model {
         return fabriques;
     }
 
-    public ArrayList<Object> getCentreTable() {
+    public CentreTable getCentreTable() {
         return centreTable;
     }
 
