@@ -1,60 +1,57 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Plateau {
     //plateau du joueur
     // A faire plus tard, avec les images,affichage, interactions tout ça tout ça
-    ArrayList<Tuile> penalite;
+    LigneTuile plancher;
     private int pointDuJoueur;
     private ArrayList<Tuile> mainActuelle;
-    public Tuile[][] ligneDeMotif;
+    public LigneTuile[] ligneDeMotif;
 
 
 
     public Plateau() {
-        penalite = new ArrayList<>();
+        plancher = new LigneTuile(7);
         pointDuJoueur = 0;
         mainActuelle = new ArrayList<>();
-        ligneDeMotif = new Tuile[5][5];
+        ligneDeMotif = new LigneTuile[5];
 
         for(int i = 0; i<5; i ++){
-            for(int j = 0; j<5;j++)
-                ligneDeMotif[i][j] = new Tuile();
+                ligneDeMotif[i] = new LigneTuile(i+1);
         }
     }
 
-    public Tuile[][] getLigneDeMotif() {
+    public LigneTuile[] getLigneDeMotif() {
         return ligneDeMotif;
     }
     public boolean isLigneSpecifiqueVide(int ligne){
-        return (this.ligneDeMotif[ligne][0].isColorNull());
+        return (this.ligneDeMotif[ligne].isVide());
     }
 
     public boolean isEmplacementLigneSpecifiqueVide(int ligne,int emplacement){
-        if(this.ligneDeMotif[ligne][emplacement].isColorNull())
-            return true;
-        return false;
+
+        return(this.ligneDeMotif[ligne].getListeTuiles().size() < emplacement+1);
     }
 
-    public void setLigneDeMotif(Tuile[][] ligneDeMotif) {
+    public void setLigneDeMotif(LigneTuile[] ligneDeMotif) {
         this.ligneDeMotif = ligneDeMotif;
     }
 
     public void addPenalite(Tuile tuile){
-        penalite.add(tuile);
+        plancher.addTuile(tuile);
     }
 
     public int getTaillePenalite(){
-        return penalite.size();
+        return plancher.getTaille();
     }
 
 
     //methode pour verifier a chaque tour si un joueur prend des points de pénalité ou non
     // a partir de la taille de la list ou se situe les jetons de penalité
     public void calculPenalite() {
-        switch (penalite.size()) {
+        switch (plancher.getTaille()) {
             case 0:
                 break;
             case 1: // en cas de 1 jeton sur la pénalité, on perd 1 point
@@ -112,12 +109,12 @@ public class Plateau {
         mainActuelle.add(tuile);
     }
 
-    public ArrayList<Tuile> getPenalite() {
-        return penalite;
+    public LigneTuile getPlancher() {
+        return plancher;
     }
 
-    public void setPenalite(ArrayList<Tuile> penalite) {
-        this.penalite = penalite;
+    public void setPlancher(LigneTuile plancher) {
+        this.plancher = plancher;
     }
 
     public ArrayList<Tuile> getMainActuelle() {

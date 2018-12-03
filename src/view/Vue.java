@@ -104,7 +104,7 @@ public class Vue extends JFrame{
         JButtonTuilesLigneMotif = new JButton[5][5];
         for(int i=0; i<5;i++){
             for(int j=0; j<i+1;j++) {
-                JButtonTuilesLigneMotif[i][j] = new JButton("ligne : " + i + " tuiles : " + j);
+                JButtonTuilesLigneMotif[i][j] = new JButton("ligne : " + (i+1) + " tuiles : " + (j+1));
                 JButtonTuilesLigneMotif[i][j].setPreferredSize(new Dimension(40, 40));
 
             }
@@ -187,7 +187,6 @@ public class Vue extends JFrame{
         for(int i = 0; i < 7; i++){
             JPanelPlancher.add(JLabelPlancher[i]);
         }
-
         //PENALITES
         JPanelPenalites.setLayout(new GridLayout(1, model.getNombreJoueur(), 10, 10));
         for(int i = 0 ; i < model.getNombreJoueur(); i++){
@@ -253,12 +252,5 @@ public class Vue extends JFrame{
         JButtonQuitter.addActionListener(cb);
     }
 
-    public void actualiseVueLigneDeMotif(){
-        for(int i = 0; i<5; i++){
-            for(int j = 0 ; j<5; j ++){
-                this.JButtonTuilesLigneMotif[i][j].setIcon(new ImageIcon( model.getListJoueurs().get(0).getLigneDeMotif()[i][j].getCouleurTuile().getImageTuile()));
-            }
-        }
 
-    }
 }

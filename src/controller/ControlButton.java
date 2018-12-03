@@ -8,7 +8,6 @@ import view.Vue;
 
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -94,7 +93,7 @@ public class ControlButton implements ActionListener {
                 for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
                     vue.JLabelPenalites[i-1].setText("Pénalités du joueur " + i + " : " + model.getListJoueurs().get(i-1).getTaillePenalite());
                 }
-                vue.JLabelPlancher[model.getListJoueurs().get(0).getPenalite().size()].setText("Marqueur du premier joueur");
+                vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setText("Marqueur du premier joueur");
                 vue.JPanelMarqueurPremier.setVisible(false);
 
             }
@@ -114,18 +113,18 @@ public class ControlButton implements ActionListener {
                                     if(tuile.equals(model.getTuilePremierJoueur())){
 
                                         model.getListJoueurs().get(0).addPenalite(model.getTuilePremierJoueur());
-                                        vue.JLabelPlancher[model.getListJoueurs().get(0).getPenalite().size()].setText("Marqueur du premier joueur");
+                                        vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setText("Marqueur du premier joueur");
                                     } else {
 
-                                        if(tampon+1 > i+1){
-                                            vue.JLabelPlancher[model.getListJoueurs().get(0).getPenalite().size()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                        if(tampon > i){
+                                            vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                             model.getListJoueurs().get(0).addPenalite(model.getListJoueurs().get(0).getMainActuelle().get(tampon));
                                         } else {
 
                                             vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                             vue.JButtonTuilesLigneMotif[i][tampon].setText("");
 
-                                            model.getListJoueurs().get(0).ligneDeMotif[i][tampon] = tuile;
+                                            model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
                                         }
 
                                     }
