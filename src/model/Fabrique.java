@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 //Petit rond sur lequel on pose les tuiles
@@ -32,6 +33,19 @@ public class Fabrique {
 
     public void clearTuilesOnFabrique(){
         tuilesOnFabrique.clear();
+    }
+
+    public void prendreTuile(Tuile tuile, CentreTable centreTable, Plateau joueur){
+        joueur.addTuileInMain(tuile);
+        removeTuile(tuile);
+        for(int i = 0 ; i < 3 ; i++){
+            if (tuile.getCouleurTuile() == tuilesOnFabrique.get(i).getCouleurTuile()){
+                joueur.addTuileInMain(tuilesOnFabrique.get(i));
+            } else {
+                centreTable.addTuile(tuilesOnFabrique.get(i));
+            }
+        }
+        clearTuilesOnFabrique();
     }
 
 

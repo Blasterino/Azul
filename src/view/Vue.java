@@ -31,7 +31,7 @@ public class Vue extends JFrame{
     public JButton JButtonMarqueurPremier;
     public JPanel JPanelCentreTable;
 
-    public JButton[] JButtonMainJoueur;
+    //public JButton[] JButtonMainJoueur;
 
     public JLabel[] JLabelPenalites;
 
@@ -95,10 +95,10 @@ public class Vue extends JFrame{
         //JButtonMarqueurPremier.setPreferredSize(new Dimension(40,40));
 
         //MAIN DU JOUEUR
-        JButtonMainJoueur = new JButton[4];
+        /*JButtonMainJoueur = new JButton[4];
         for(int i = 1 ; i <= 4 ; i++){
             JButtonMainJoueur[i-1] = new JButton("Tuile " + i);
-        }
+        }*/
 
         //LIGNE MOTIF*
         JButtonTuilesLigneMotif = new JButton[5][5];
@@ -157,18 +157,22 @@ public class Vue extends JFrame{
             JPanelMilieuTable.add(JPanelFabriques[i]);
         }
         //Centre de table
-        //Ajout du marqueur 1er
+        /*//Ajout du marqueur 1er
         JPanelMarqueurPremier.add(JButtonMarqueurPremier);
         JPanelCentreTable.add(new JLabel("Centre de table :"));
         JPanelCentreTable.add(JPanelMarqueurPremier);
+        JPanelMilieuTable.add(JPanelCentreTable);*/
+        JPanelCentreTable.add(new JLabel("Centre de table : "));
+        JPanelCentreTable.add(JButtonMarqueurPremier);
         JPanelMilieuTable.add(JPanelCentreTable);
+
 
 
         //MAIN DU JOUEUR
         JPanelMainJoueur.setLayout(new GridLayout(1, 4, 10, 10));
-        for(int i = 0 ; i < 4 ; i++){
+        /*for(int i = 0 ; i < 4 ; i++){
             JPanelMainJoueur.add(JButtonMainJoueur[i]);
-        }
+        }*/
 
         //LIGNE MOTIFS
 
@@ -238,9 +242,9 @@ public class Vue extends JFrame{
         JButtonMarqueurPremier.addActionListener(cb);
 
         //CONTROL DES TUILES DE LA MAIN DU JOUEUR
-        for(int i = 0 ; i < 4 ; i++){
+        /*for(int i = 0 ; i < 4 ; i++){
             JButtonMainJoueur[i].addActionListener(cb);
-        }
+        }*/
 
         for(int i= 0; i <5; i++){
             for(int j=0; j<i+1;j++)
