@@ -8,6 +8,7 @@ import view.Vue;
 
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -67,7 +68,6 @@ public class ControlButton implements ActionListener {
                         JLabelMainJoueur.setIcon(new ImageIcon("Resources/" + model.getListJoueurs().get(0).getMainActuelle().get(j).getCouleurTuile().getImageTuile()));
                         JLabelMainJoueur.setPreferredSize(new Dimension(40, 40));
                         vue.JPanelMainJoueur.add(JLabelMainJoueur);
-
 
                     }
                     model.setJoueurAvecTuileEnMain(true);
@@ -145,7 +145,7 @@ public class ControlButton implements ActionListener {
                                     } else {
 
                                         if(tampon > i){
-                                            vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                            vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                             model.getListJoueurs().get(0).addPenalite(model.getListJoueurs().get(0).getMainActuelle().get(tampon));
                                         } else {
 
@@ -165,10 +165,11 @@ public class ControlButton implements ActionListener {
                             }
                             model.setJoueurAvecTuileEnMain(false);
                             model.getListJoueurs().get(0).getMainActuelle().clear();
-                            /*for(int n=0; n<4; n++){
-                                vue.JButtonMainJoueur[n].setIcon(null);
-                                vue.JButtonMainJoueur[n].setText("Tuile "+ n);
-                            }*/
+
+                            // on supprime l'affichage de la main
+
+                                vue.JPanelMainJoueur.removeAll();
+
 
                             for(int p = 0 ; p < model.getNombreFabriqueGame() ; p++){
                                 for(int q = 0 ; q < 4 ; q++) {
