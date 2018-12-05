@@ -168,7 +168,7 @@ public class ControlButton implements ActionListener {
 
                             // on supprime l'affichage de la main
 
-                                vue.JPanelMainJoueur.removeAll();
+                            vue.JPanelMainJoueur.removeAll();
 
 
                             for(int p = 0 ; p < model.getNombreFabriqueGame() ; p++){

@@ -50,7 +50,7 @@
             <border type="none"/>
             <children>
               <component id="95473" class="javax.swing.JLabel" binding="JLabelLigneMotif">
-                <constraints border-constraint="Center"/>
+                <constraints border-constraint="East"/>
                 <properties>
                   <text value="Lignes de motifs"/>
                 </properties>

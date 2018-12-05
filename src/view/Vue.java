@@ -102,10 +102,11 @@ public class Vue extends JFrame{
 
         //LIGNE MOTIF*
         JButtonTuilesLigneMotif = new JButton[5][5];
+
         for(int i=0; i<5;i++){
             for(int j=0; j<i+1;j++) {
                 JButtonTuilesLigneMotif[i][j] = new JButton("ligne : " + (i+1) + " tuiles : " + (j+1));
-                JButtonTuilesLigneMotif[i][j].setPreferredSize(new Dimension(40, 40));
+
 
             }
         }
@@ -176,11 +177,19 @@ public class Vue extends JFrame{
 
         //LIGNE MOTIFS
 
-        JPanelLigneMotif.setLayout(new GridLayout(5,5,10,10));
+        JPanelLigneMotif.setLayout(new GridLayout(5,1));
         for(int i= 0; i <5; i++){
-            for(int j=0; j<i+1;j++)
-            JPanelLigneMotif.add(JButtonTuilesLigneMotif[i][j]);
+            JPanel JPanelTemporaire = new JPanel();
+            for(int j=0; j<i+1;j++) {
+                JPanelTemporaire.setLayout(new GridLayout(5,5,10,10));
+                JPanelTemporaire.add(JButtonTuilesLigneMotif[i][j]);
+                JPanelTemporaire.setAlignmentX(JScrollPane.RIGHT_ALIGNMENT);
+                JPanelTemporaire.setLayout(new BoxLayout(JPanelTemporaire,BoxLayout.X_AXIS));
+            }
+            JPanelLigneMotif.add(JPanelTemporaire);
+            JPanelLigneMotif.setLayout(new BoxLayout(JPanelLigneMotif,BoxLayout.Y_AXIS));
         }
+       // JPanelLigneMotif.setAlignmentX(JScrollPane.TOP_ALIGNMENT);
 
 
 
