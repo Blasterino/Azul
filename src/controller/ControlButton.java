@@ -135,32 +135,42 @@ public class ControlButton implements ActionListener {
 
                             int tampon = 0;
                             for(Tuile tuile : model.getListJoueurs().get(0).getMainActuelle()){
-
+                                // Si la ligne est vide, on pose les tuiles sans reflechir
                                 if(model.getListJoueurs().get(0).isEmplacementLigneSpecifiqueVide(i,tampon) && model.isJoueurAvecTuileEnMain()){
-
+                                    //si on prend la tuile du premier joueur, on prend penalité
                                     if(tuile.equals(model.getTuilePremierJoueur())){
 
                                         model.getListJoueurs().get(0).addPenalite(model.getTuilePremierJoueur());
                                         vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setText("Marqueur du premier joueur");
                                     } else {
-
-                                        if(tampon > i){
+                                      /*  if(tampon > i){
+                                            System.out.println("pute");
                                             vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                             model.getListJoueurs().get(0).addPenalite(model.getListJoueurs().get(0).getMainActuelle().get(tampon));
-                                        } else {
-
+                                        } else { */
+                                            System.out.println("chien");
                                             vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                             vue.JButtonTuilesLigneMotif[i][tampon].setText("");
-
                                             model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
-                                        }
+                                     //   }
 
                                     }
 
                                     tampon++;
                                 }
-                                else {
-                                    System.out.println("Vous ne pouvez pas");
+
+                                // Si des tuiles sont déjà présentes et possédent la même couleurs
+                                else if(model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().get(tampon).getCouleurTuile() == tuile.getCouleurTuile()) {
+                                   // System.out.println("Vous ne pouvez pas");
+                                    //"Même couleur, on ajoute"
+                                        tampon = model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size();
+                                        vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                        vue.JButtonTuilesLigneMotif[i][tampon].setText("");
+                                        model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
+
+                                    tampon++;
+                                }else{
+                                    System.out.println("Vous ne pouvez pas : Pas les mêmes couleurs ");
                                 }
                             }
                             model.setJoueurAvecTuileEnMain(false);
@@ -169,8 +179,6 @@ public class ControlButton implements ActionListener {
                             // on supprime l'affichage de la main
 
                             vue.JPanelMainJoueur.removeAll();
-
-
                             for(int p = 0 ; p < model.getNombreFabriqueGame() ; p++){
                                 for(int q = 0 ; q < 4 ; q++) {
                                     vue.JButtonTuilesInFabriques[p][q].setEnabled(true);
