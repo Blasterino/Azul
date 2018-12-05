@@ -23,7 +23,7 @@ public class Model {
             Plateau joueur = new Plateau();
             listJoueurs.add(joueur);
         }
-        //variable utilisé
+        //variable utilisée
         joueurAvecTuileEnMain = false;
         // Création pioche et défausse
         sacPioche= new Sac();

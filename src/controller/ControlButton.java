@@ -28,7 +28,6 @@ public class ControlButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == vue.JButtonJouerMenu){
-            System.out.println("appui bouton jouer");
             vue.creatingGameFrame();
         }
         if (e.getSource() == vue.JButtonRegles){
@@ -73,9 +72,9 @@ public class ControlButton implements ActionListener {
                     model.setJoueurAvecTuileEnMain(true);
 
                     //Disposition dans le centre de table
-                    for(int j = 0 ; j < model.getCentreTable().getTuilesOnCentreTable().size() ; j++){
+                    for(int j = 0 ; j < model.getCentreTable().getTuilesOnFabrique().size() ; j++){
                         JButton JButtonCentreTable = new JButton();
-                        JButtonCentreTable.setIcon(new ImageIcon("Resources/" + model.getCentreTable().getTuilesOnCentreTable().get(j)));
+                        JButtonCentreTable.setIcon(new ImageIcon("Resources/" + model.getCentreTable().getTuilesOnFabrique().get(j)));
                         vue.JPanelCentreTable.add(JButtonCentreTable);
                     }
 
@@ -112,27 +111,11 @@ public class ControlButton implements ActionListener {
                 }*/
             }
 
-            // partie tuile premier joueur
-            if(e.getSource() == vue.JButtonMarqueurPremier){
-                System.out.println("Marqueur 1er");
-                model.getListJoueurs().get(0).addPenalite(new Tuile(CouleurTuile.PREMIERJOUEUR));
-                model.getListJoueurs().get(0).calculPenalite();
-                System.out.println(model.getListJoueurs().get(0).getTaillePenalite());
-                for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
-                    vue.JLabelPenalites[i-1].setText("Pénalités du joueur " + i + " : " + model.getListJoueurs().get(i-1).getTaillePenalite());
-                }
-                vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setText("Marqueur du premier joueur");
-                vue.JPanelMarqueurPremier.setVisible(false);
-
-            }
-
-
             // de la main vers la ligne de motif
             for(int i=0; i< 5 ; i++){
                 for(int j=0; j< i+1; j++){
                     if(e.getSource() == vue.JButtonTuilesLigneMotif[i][j]){
                         if(model.isJoueurAvecTuileEnMain()){
-
                             int tampon = 0;
                             for(Tuile tuile : model.getListJoueurs().get(0).getMainActuelle()){
                                 // Si la ligne est vide, on pose les tuiles sans reflechir

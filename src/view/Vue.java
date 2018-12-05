@@ -70,13 +70,13 @@ public class Vue extends JFrame{
 
         //MILIEU TABLE
         //Créations des fabriques
-        JPanelFabriques = new JPanel[model.getFabriques().length];
-        for(int i=0; i < model.getNombreFabriqueGame(); i++)
+        JPanelFabriques = new JPanel[model.getFabriques().length+1];
+        for(int i=0; i < model.getNombreFabriqueGame()+1; i++)
             JPanelFabriques[i] = new JPanel();
 
         //Créations des tuiles par fabrique
         JButtonTuilesInFabriques = new JButton[model.getFabriques().length][4];
-        for(int i = 0 ; i < JPanelFabriques.length ; i++){
+        for(int i = 0 ; i < JPanelFabriques.length-1 ; i++){
            // Fabrique fabrique = model.getFabriques()[i];
             for(int j = 0 ; j < 4 ; j++){
                 JButtonTuilesInFabriques[i][j] = new JButton();
@@ -120,6 +120,7 @@ public class Vue extends JFrame{
             JLabelPlancher[i] = new JLabel();
             JPanelPlancher.add(JLabelPlancher[i]);
         }
+        JPanelPlancher.add(new JButton("salutatous"));
 
         //PENALITES
         JLabelPenalites = new JLabel[model.getNombreJoueur()];
@@ -145,6 +146,7 @@ public class Vue extends JFrame{
 
 
         //MILIEU TABLE
+
         //Ajout des tuiles dans les fabriques
         int tampon=0;
         JPanelMilieuTable.setLayout(new GridLayout(3,3,10,10));
@@ -154,19 +156,21 @@ public class Vue extends JFrame{
                 tampon++;
             }
         }
+        //ajout du panel centre table
+        JPanelCentreTable.add(new JLabel("Centre de table : "));
+        JPanelCentreTable.add(JButtonMarqueurPremier);
+        JPanelFabriques[JPanelFabriques.length-1].add(JPanelCentreTable);
+
         //Ajout des fabriques au centre de la table
-        for(int i = 0 ; i < model.getNombreFabriqueGame() ; i++){
+        for(int i = 0 ; i < model.getNombreFabriqueGame()+1 ; i++){
             JPanelMilieuTable.add(JPanelFabriques[i]);
         }
         //Centre de table
         /*//Ajout du marqueur 1er
         JPanelMarqueurPremier.add(JButtonMarqueurPremier);
         JPanelCentreTable.add(new JLabel("Centre de table :"));
-        JPanelCentreTable.add(JPanelMarqueurPremier);
-        JPanelMilieuTable.add(JPanelCentreTable);*/
-        JPanelCentreTable.add(new JLabel("Centre de table : "));
-        JPanelCentreTable.add(JButtonMarqueurPremier);
-        JPanelMilieuTable.add(JPanelCentreTable);
+        JPanelCentreTable.add(JPanelMarqueurPremier);*/
+
 
 
 
@@ -199,14 +203,16 @@ public class Vue extends JFrame{
         //PLANCHER
         JPanelPlancher.setLayout(new GridLayout(1,7));
         for(int i = 0; i < 7; i++){
-            JPanelPlancher.add(JLabelPlancher[i]);
+            JPanel JpanelTemp = new JPanel();
+            JpanelTemp.add(JLabelPlancher[i]);
+            JPanelPlancher.add(JpanelTemp);
         }
         //PENALITES
         JPanelPenalites.setLayout(new GridLayout(1, model.getNombreJoueur(), 10, 10));
         for(int i = 0 ; i < model.getNombreJoueur(); i++){
             JPanelPenalites.add(JLabelPenalites[i]);
         }
-        JPanelPenalites.add(JPanelPlancher);
+
 
 
     }
@@ -242,7 +248,7 @@ public class Vue extends JFrame{
     public void setControlButton(ActionListener cb){
         //CONTROL DES TUILES DU CENTRE DE LA TABLE
         int tampon = 0;
-        for(int i = 0 ; i < JPanelFabriques.length ; i++){
+        for(int i = 0 ; i < JPanelFabriques.length-1 ; i++){
             for(int j = 0 ; j < 4 ; j++){
                 JButtonTuilesInFabriques[i][j].addActionListener(cb);
                 tampon++;

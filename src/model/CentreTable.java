@@ -2,32 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-public class CentreTable {
-
-    public ArrayList<Tuile> tuilesOnCentreTable;
+public class CentreTable extends Fabrique{
 
     public CentreTable(){
-        tuilesOnCentreTable = new ArrayList<>();
-    }
-
-    public ArrayList<Tuile> getTuilesOnCentreTable() {
-        return tuilesOnCentreTable;
-    }
-
-    public void setTuilesOnCentreTable(ArrayList<Tuile> tuilesOnCentreTable) {
-        this.tuilesOnCentreTable = tuilesOnCentreTable;
-    }
-
-    public void addTuile(Tuile tuile){
-        tuilesOnCentreTable.add(tuile);
-    }
-
-    public void removeTuile(Tuile tuile){
-        tuilesOnCentreTable.remove(tuile);
-    }
-
-    public void clearTuiles(){
-        tuilesOnCentreTable.clear();
+        super();
+        tuilesOnFabrique = new ArrayList<>();
     }
 
     public void prendreTuile(Tuile tuile, Plateau joueur){
@@ -35,7 +14,7 @@ public class CentreTable {
         removeTuile(tuile);
 
         ArrayList<Tuile> tuilesAEnlever = new ArrayList<>();
-        for(Tuile tuile1 : tuilesOnCentreTable){
+        for(Tuile tuile1 : tuilesOnFabrique){
             if(tuile.getCouleurTuile() == tuile1.getCouleurTuile()){
                 joueur.addTuileInMain(tuile1);
                 tuilesAEnlever.add(tuile1);
