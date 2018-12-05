@@ -21,7 +21,7 @@ public class Vue extends JFrame{
     protected JPanel JPanelPenalites;
     protected JLabel JLabelMur;
     private JLabel JLabelLigneMotif;
-    protected JPanel JPanelPlancher;
+    public JPanel JPanelPlancher;
 
     public JLabel[] JLabelScores,JLabelPlancher;
 
@@ -61,6 +61,7 @@ public class Vue extends JFrame{
         JLabelRegles = new JLabel("ici les regles");
         JPanelMenu = new JPanel();
         JPanelRules = new JPanel();
+        JPanelPenalites = new JPanel();
         //SCORES
         JLabelScores = new JLabel[model.getNombreJoueur()];
         for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
@@ -123,7 +124,7 @@ public class Vue extends JFrame{
         //PENALITES
         JLabelPenalites = new JLabel[model.getNombreJoueur()];
         for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
-            JLabelPenalites[i-1] = new JLabel("Pénalités du joueur " + i + " : " + model.getListJoueurs().get(i-1).getTaillePenalite());
+            JLabelPenalites[i-1] = new JLabel("Taille du plancher de  " + i + " : " + model.getListJoueurs().get(i-1).getPlancher().getListeTuiles().size());
         }
     }
 
@@ -205,12 +206,14 @@ public class Vue extends JFrame{
         for(int i = 0 ; i < model.getNombreJoueur(); i++){
             JPanelPenalites.add(JLabelPenalites[i]);
         }
+        JPanelPenalites.add(JPanelPlancher);
+
+
     }
 
     public void display(){
         setVisible(true);
     }
-
     public void creatingGameFrame(){
         newGameFrame = new JFrame();
         newGameFrame.add(JPanelBase);
@@ -236,7 +239,6 @@ public class Vue extends JFrame{
         setTitle("Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
     public void setControlButton(ActionListener cb){
         //CONTROL DES TUILES DU CENTRE DE LA TABLE
         int tampon = 0;
@@ -251,9 +253,6 @@ public class Vue extends JFrame{
         JButtonMarqueurPremier.addActionListener(cb);
 
         //CONTROL DES TUILES DE LA MAIN DU JOUEUR
-        /*for(int i = 0 ; i < 4 ; i++){
-            JButtonMainJoueur[i].addActionListener(cb);
-        }*/
 
         for(int i= 0; i <5; i++){
             for(int j=0; j<i+1;j++)

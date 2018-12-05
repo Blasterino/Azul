@@ -148,10 +148,23 @@ public class ControlButton implements ActionListener {
                                             vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                             model.getListJoueurs().get(0).addPenalite(model.getListJoueurs().get(0).getMainActuelle().get(tampon));
                                         } else { */
-                                            System.out.println("chien");
-                                            vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-                                            vue.JButtonTuilesLigneMotif[i][tampon].setText("");
-                                            model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
+
+                                      //Si on dépasse la taille max de la ligne de motif : on doit en mettre dans le plancher
+                                      if(model.getListJoueurs().get(0).ligneDeMotif[i].getTaille() == model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size()){
+                                          model.getListJoueurs().get(0).getPlancher().addTuile(tuile);
+
+                                          //vue.JPanelPlancher.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+
+                                          JLabel JLabelPenalite = new JLabel();
+                                          JLabelPenalite.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                          JLabelPenalite.setPreferredSize(new Dimension(40, 40));
+                                          vue.JPanelPlancher.add(JLabelPenalite);
+
+                                      }else{ // sinon on les ajoute normalement dans la ligne de motif
+                                          vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                          vue.JButtonTuilesLigneMotif[i][tampon].setText("");
+                                          model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
+                                      }
                                      //   }
 
                                     }

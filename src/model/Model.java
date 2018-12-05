@@ -28,18 +28,14 @@ public class Model {
         // Création pioche et défausse
         sacPioche= new Sac();
         defausse= new Sac();
-
         // Création centre de la table
         centreTable = new CentreTable();
         //Création fabriques
         fabriques = new Fabrique[getNombreFabriqueGame()];
-
         //Remplissage de la pioche
         sacPioche.remplirPaquetDebutDePartie();
-
         //Initialisation des fabriques
         initialisationFabriques();
-
         //Initialisation du centre
         centreTable.addTuile(new Tuile(CouleurTuile.PREMIERJOUEUR));
 
