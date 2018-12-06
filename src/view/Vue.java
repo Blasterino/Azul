@@ -49,6 +49,7 @@ public class Vue extends JFrame{
     public JFrame newGameFrame;
     public JFrame newRulesFrame;
 
+
     public Vue(Model model){
         this.model = model;
         initAttribut();
@@ -66,7 +67,7 @@ public class Vue extends JFrame{
         JPanelMenu = new JPanel();
         JPanelRules = new JPanel();
         //je l'ai mis en commentaire car c'est pas la peine, pas besoin d'instancier c'est déjà fait dans le .form
-        JPanelPenalites = new JPanel();
+        //JPanelPenalites = new JPanel();
         JButtonTuilesCentre = new ArrayList<>();
         //SCORES
         JLabelScores = new JLabel[model.getNombreJoueur()];
@@ -208,6 +209,7 @@ public class Vue extends JFrame{
         //MUR
 
         //PLANCHER
+
         JPanelPlancher.setLayout(new GridLayout(1,7));
         for(int i = 0; i < 7; i++){
             JPanel JpanelTemp = new JPanel();

@@ -168,7 +168,6 @@ public class ControlButton implements ActionListener {
                                       //Si on dépasse la taille max de la ligne de motif : on doit en mettre dans le plancher
                                       if(model.getListJoueurs().get(0).ligneDeMotif[i].getTaille() == model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size()){
                                           model.getListJoueurs().get(0).getPlancher().addTuile(tuile);
-
                                           //vue.JPanelPlancher.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
 
                                           JLabel JLabelPenalite = new JLabel();
@@ -220,5 +219,7 @@ public class ControlButton implements ActionListener {
             }
         }
         vue.JPanelBase.updateUI();
+        vue.JPanelRules.updateUI();
+
     }
 }
