@@ -29,6 +29,7 @@ public class ControlButton implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == vue.JButtonJouerMenu){
             vue.creatingGameFrame();
+            vue.JPanelBase.updateUI();
         }
         if (e.getSource() == vue.JButtonRegles){
             vue.creatingRulesFrame();
@@ -42,15 +43,12 @@ public class ControlButton implements ActionListener {
 
         if(e.getSource() instanceof JButton){
             for(int i = 0 ; i < vue.JButtonTuilesInFabriques.length ; i++){
-                //ArrayList<Tuile> tuilesRecup = new ArrayList<>(4);
                 Tuile tuileChoisie = null;
                 //Récupération de la tuile choisie
                 for(int j = 0 ; j < 4 ; j++){
                     if(e.getSource() == vue.JButtonTuilesInFabriques[i][j]){
                         if(!model.getFabriques()[i].isFabriqueVide()) {
                             tuileChoisie = model.getFabriques()[i].getTuilesOnFabrique().get(j);
-                            //tuilesRecup.add(tuileChoisie);
-                            model.getFabriques()[i].removeTuile(tuileChoisie);
                             vue.JPanelFabriques[i].setVisible(false);
                         }
                     }
@@ -72,11 +70,22 @@ public class ControlButton implements ActionListener {
                     model.setJoueurAvecTuileEnMain(true);
 
                     //Disposition dans le centre de table
+                    //On enlève tout ce qu'il y a dans l'affichage pour éviter les doublons
+                    vue.JPanelCentreTable.removeAll();
+                    //On remet le texte et le marqueur
+                    vue.JPanelCentreTable.add(new JLabel("Centre de table : "));
+                    vue.JPanelCentreTable.add(vue.JButtonMarqueurPremier);
                     for(int j = 0 ; j < model.getCentreTable().getTuilesOnFabrique().size() ; j++){
-                        JButton JButtonCentreTable = new JButton();
-                        JButtonCentreTable.setIcon(new ImageIcon("Resources/" + model.getCentreTable().getTuilesOnFabrique().get(j)));
-                        vue.JPanelCentreTable.add(JButtonCentreTable);
+                        //condition pour éviter d'avoir le marqueur en doublon ou trop petit à cause du Dimension
+                        if(model.getCentreTable().getTuilesOnFabrique().get(j).getCouleurTuile() != CouleurTuile.PREMIERJOUEUR){
+                            JButton JButtonCentreTable = new JButton();
+                            JButtonCentreTable.setIcon(new ImageIcon("Resources/" + model.getCentreTable().getTuilesOnFabrique().get(j).getCouleurTuile().getImageTuile()));
+                            JButtonCentreTable.setPreferredSize(new Dimension(40, 40));
+                            JButtonCentreTable.addActionListener(this);
+                            vue.JPanelCentreTable.add(JButtonCentreTable);
+                        }
                     }
+                    System.out.println(model.getCentreTable());
 
                     //Désactivation des fabriques
                     for(int j = 0 ; j < 4 ; j++){
@@ -109,6 +118,30 @@ public class ControlButton implements ActionListener {
                     vue.JButtonMainJoueur[compteur].setText("");
                     compteur++;
                 }*/
+            }
+
+            //CENTRE TABLE VERS MAIN
+            //Parcours des tuiles sur le centre de table
+            for(int i = 0 ; i < model.getCentreTable().getTuilesOnFabrique().size() ; i++){
+                Tuile tuileChoisie = null;
+                //si l'action a été effectuée sur une tuile du centre de table (hors marqueur), on la récupère
+                if(e.getSource() == vue.JPanelCentreTable.getComponent(i+1) && e.getSource() != vue.JButtonMarqueurPremier){
+                    tuileChoisie = model.getCentreTable().getTuilesOnFabrique().get(i);
+                    vue.JPanelCentreTable.remove(vue.JPanelCentreTable.getComponent(i+1));
+                }
+
+                //si on a pu récupérer une tuile, on récupère toutes les autres de la même couleur
+                if(tuileChoisie != null){
+                    model.getCentreTable().prendreTuile(tuileChoisie, model.getListJoueurs().get(0));
+                    //Ajout dans la main des tuiles
+                    for(int j = 0 ; j < model.getListJoueurs().get(0).getMainActuelle().size() ; j++){
+                        JLabel JLabelMainJoueur = new JLabel();
+                        JLabelMainJoueur.setIcon(new ImageIcon("Resources/" + model.getListJoueurs().get(0).getMainActuelle().get(j).getCouleurTuile().getImageTuile()));
+                        JLabelMainJoueur.setPreferredSize(new Dimension(40, 40));
+                        vue.JPanelMainJoueur.add(JLabelMainJoueur);
+                    }
+                    model.setJoueurAvecTuileEnMain(true);
+                }
             }
 
             // de la main vers la ligne de motif
@@ -186,6 +219,6 @@ public class ControlButton implements ActionListener {
                 }
             }
         }
-
+        vue.JPanelBase.updateUI();
     }
 }

@@ -25,4 +25,11 @@ public class CentreTable extends Fabrique{
             removeTuile(tuile1);
         }
     }
+
+    @Override
+    public String toString() {
+        return "CentreTable{" +
+                "tuilesOnFabrique=" + tuilesOnFabrique +
+                '}';
+    }
 }

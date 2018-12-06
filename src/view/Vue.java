@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class Vue extends JFrame{
     protected Model model;
 
-    protected JPanel JPanelBase;
+    public JPanel JPanelBase;
     protected JPanel JPanelScore;
     public JPanel JPanelMilieuTable;
     public JPanel JPanelMainJoueur;
@@ -61,6 +61,7 @@ public class Vue extends JFrame{
         JLabelRegles = new JLabel("ici les regles");
         JPanelMenu = new JPanel();
         JPanelRules = new JPanel();
+        //je l'ai mis en commentaire car c'est pas la peine, pas besoin d'instancier c'est déjà fait dans le .form
         JPanelPenalites = new JPanel();
         //SCORES
         JLabelScores = new JLabel[model.getNombreJoueur()];
@@ -114,6 +115,7 @@ public class Vue extends JFrame{
         //MUR
 
         //PLANCHER
+        //En comm car déjà fait dans l'ui
         JPanelPlancher = new JPanel();
         JLabelPlancher = new JLabel[7];
         for(int i = 0; i < 7; i++){
