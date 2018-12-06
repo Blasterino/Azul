@@ -3,9 +3,12 @@ package view;
 import model.Fabrique;
 import model.Model;
 
+import javax.sound.midi.SysexMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Vue extends JFrame{
@@ -27,6 +30,7 @@ public class Vue extends JFrame{
 
     public JPanel[] JPanelFabriques;
     public JButton[][] JButtonTuilesInFabriques,JButtonTuilesLigneMotif;
+    public List<JButton> JButtonTuilesCentre;
     public JPanel JPanelMarqueurPremier;
     public JButton JButtonMarqueurPremier;
     public JPanel JPanelCentreTable;
@@ -63,6 +67,7 @@ public class Vue extends JFrame{
         JPanelRules = new JPanel();
         //je l'ai mis en commentaire car c'est pas la peine, pas besoin d'instancier c'est déjà fait dans le .form
         JPanelPenalites = new JPanel();
+        JButtonTuilesCentre = new ArrayList<>();
         //SCORES
         JLabelScores = new JLabel[model.getNombreJoueur()];
         for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
@@ -71,15 +76,16 @@ public class Vue extends JFrame{
 
         //MILIEU TABLE
         //Créations des fabriques
-        JPanelFabriques = new JPanel[model.getFabriques().length+1];
+        JPanelFabriques = new JPanel[model.getFabriques().length];
         for(int i=0; i < model.getNombreFabriqueGame()+1; i++)
             JPanelFabriques[i] = new JPanel();
 
         //Créations des tuiles par fabrique
         JButtonTuilesInFabriques = new JButton[model.getFabriques().length][4];
-        for(int i = 0 ; i < JPanelFabriques.length-1 ; i++){
-           // Fabrique fabrique = model.getFabriques()[i];
-            for(int j = 0 ; j < 4 ; j++){
+        for(int i = 0 ; i < JPanelFabriques.length ; i++){
+           System.out.println(String.valueOf(i)+" fois");
+            for(int j = 0 ; j < model.getFabriques()[i].getTuilesOnFabrique().size() ; j++){
+
                 JButtonTuilesInFabriques[i][j] = new JButton();
                 JButtonTuilesInFabriques[i][j].setIcon(new ImageIcon("Resources/" + model.getFabriques()[i].getTuilesOnFabrique().get(j).getCouleurTuile().getImageTuile()));
              //   JButtonTuilesInFabriques[i][j].setIcon(new ImageIcon("Resources/" + fabrique.getTuilesOnFabrique().get(j).getCouleurTuile().getImageTuile()));
@@ -92,7 +98,9 @@ public class Vue extends JFrame{
         JPanelCentreTable = new JPanel();
         //Marqueur 1er joueur
         JPanelMarqueurPremier = new JPanel();
-        JButtonMarqueurPremier = new JButton("Marqueur 1er joueur");
+        JButtonMarqueurPremier = new JButton();
+        JButtonMarqueurPremier.setIcon(new ImageIcon("Resources/" + model.getFabriques()[JPanelFabriques.length-1].getTuilesOnFabrique().get(0).getCouleurTuile().getImageTuile()));
+        JPanelCentreTable.add(JButtonMarqueurPremier);
         //JButtonMarqueurPremier.setIcon(new ImageIcon("Resources/" + model.getTuilePremierJoueur().getCouleurTuile().getImageTuile()));
         //JButtonMarqueurPremier.setPreferredSize(new Dimension(40,40));
 
@@ -122,7 +130,6 @@ public class Vue extends JFrame{
             JLabelPlancher[i] = new JLabel();
             JPanelPlancher.add(JLabelPlancher[i]);
         }
-        JPanelPlancher.add(new JButton("salutatous"));
 
         //PENALITES
         JLabelPenalites = new JLabel[model.getNombreJoueur()];
@@ -150,17 +157,15 @@ public class Vue extends JFrame{
         //MILIEU TABLE
 
         //Ajout des tuiles dans les fabriques
-        int tampon=0;
         JPanelMilieuTable.setLayout(new GridLayout(3,3,10,10));
         for(int i = 0 ; i < model.getNombreFabriqueGame() ; i++){
             for(int j = 0 ; j < 4 ; j++){
                 JPanelFabriques[i].add(JButtonTuilesInFabriques[i][j]);
-                tampon++;
             }
         }
+
         //ajout du panel centre table
-        JPanelCentreTable.add(new JLabel("Centre de table : "));
-        JPanelCentreTable.add(JButtonMarqueurPremier);
+        //JPanelCentreTable.add(JButtonTuilesCentre.get(0));
         JPanelFabriques[JPanelFabriques.length-1].add(JPanelCentreTable);
 
         //Ajout des fabriques au centre de la table
@@ -170,8 +175,8 @@ public class Vue extends JFrame{
         //Centre de table
         /*//Ajout du marqueur 1er
         JPanelMarqueurPremier.add(JButtonMarqueurPremier);
-        JPanelCentreTable.add(new JLabel("Centre de table :"));
-        JPanelCentreTable.add(JPanelMarqueurPremier);*/
+        JPanelCentreTable.add(new JLabel("Centre de table :"));*/
+
 
 
 

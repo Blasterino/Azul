@@ -125,14 +125,14 @@ public class ControlButton implements ActionListener {
             for(int i = 0 ; i < model.getCentreTable().getTuilesOnFabrique().size() ; i++){
                 Tuile tuileChoisie = null;
                 //si l'action a été effectuée sur une tuile du centre de table (hors marqueur), on la récupère
-                if(e.getSource() == vue.JPanelCentreTable.getComponent(i+1) && e.getSource() != vue.JButtonMarqueurPremier){
+                if(e.getSource() != vue.JButtonMarqueurPremier && e.getSource() == vue.JPanelCentreTable.getComponent(i)){
                     tuileChoisie = model.getCentreTable().getTuilesOnFabrique().get(i);
                     vue.JPanelCentreTable.remove(vue.JPanelCentreTable.getComponent(i+1));
                 }
 
                 //si on a pu récupérer une tuile, on récupère toutes les autres de la même couleur
                 if(tuileChoisie != null){
-                    model.getCentreTable().prendreTuile(tuileChoisie, model.getListJoueurs().get(0));
+                    model.getCentreTable().prendreTuile(tuileChoisie,model.getCentreTable() ,model.getListJoueurs().get(0));
                     //Ajout dans la main des tuiles
                     for(int j = 0 ; j < model.getListJoueurs().get(0).getMainActuelle().size() ; j++){
                         JLabel JLabelMainJoueur = new JLabel();
