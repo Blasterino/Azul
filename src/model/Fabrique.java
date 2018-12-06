@@ -35,7 +35,7 @@ public class Fabrique {
         tuilesOnFabrique.clear();
     }
 
-    public void prendreTuile(Tuile tuile, CentreTable centreTable, Plateau joueur){
+    public void prendreTuile(Tuile tuile, Fabrique centreTable, Plateau joueur){
         joueur.addTuileInMain(tuile);
         removeTuile(tuile);
         for(int i = 0 ; i < 3 ; i++){

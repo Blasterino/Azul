@@ -8,7 +8,6 @@ public class Model {
     ArrayList<Plateau> listJoueurs;
 
     Fabrique[] fabriques;
-    CentreTable centreTable;
     Sac sacPioche;
     Sac defausse;
     Tuile tuilePremierJoueur;
@@ -28,21 +27,25 @@ public class Model {
         // Création pioche et défausse
         sacPioche= new Sac();
         defausse= new Sac();
-        // Création centre de la table
-        centreTable = new CentreTable();
+
         //Création fabriques
-        fabriques = new Fabrique[getNombreFabriqueGame()];
+        fabriques = new Fabrique[getNombreFabriqueGame()+1];
         //Remplissage de la pioche
         sacPioche.remplirPaquetDebutDePartie();
         //Initialisation des fabriques
         initialisationFabriques();
         //Initialisation du centre
-        centreTable.addTuile(new Tuile(CouleurTuile.PREMIERJOUEUR));
 
     }
 
     //Création des fabriques en fonction du nombre de joueurs
     public void initialisationFabriques(){
+
+        CentreTable centreTable;
+        // Création centre de la table
+        centreTable = new CentreTable();
+        centreTable.addTuile(new Tuile(CouleurTuile.PREMIERJOUEUR));
+
         for(int i = 0 ; i < getNombreFabriqueGame() ; i++){
             Fabrique fabrique = new Fabrique();
             for(int j = 0 ; j < 4 ; j++){
@@ -50,6 +53,7 @@ public class Model {
             }
             fabriques[i] = fabrique;
         }
+        fabriques[fabriques.length-1] = centreTable;
     }
 
     //On effectue ici toutes les différentes étapes à faire lors d'un tours de jeux
@@ -86,8 +90,8 @@ public class Model {
         return fabriques;
     }
 
-    public CentreTable getCentreTable() {
-        return centreTable;
+    public Fabrique getCentreTable() {
+        return fabriques[fabriques.length-1];
     }
 
     public Sac getDefausse() {
