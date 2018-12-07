@@ -101,7 +101,6 @@ public class Vue extends JFrame{
         JPanelMarqueurPremier = new JPanel();
         JButtonMarqueurPremier = new JButton();
         JButtonMarqueurPremier.setIcon(new ImageIcon("Resources/" + model.getFabriques()[JPanelFabriques.length-1].getTuilesOnFabrique().get(0).getCouleurTuile().getImageTuile()));
-        JPanelCentreTable.add(JButtonMarqueurPremier);
         //JButtonMarqueurPremier.setIcon(new ImageIcon("Resources/" + model.getTuilePremierJoueur().getCouleurTuile().getImageTuile()));
         //JButtonMarqueurPremier.setPreferredSize(new Dimension(40,40));
 
@@ -167,9 +166,9 @@ public class Vue extends JFrame{
             JPanelMilieuTable.add(JPanelFabriques[i]);
         }
         //Centre de table
-        /*//Ajout du marqueur 1er
-        JPanelMarqueurPremier.add(JButtonMarqueurPremier);
-        JPanelCentreTable.add(new JLabel("Centre de table :"));*/
+        //Ajout du marqueur 1er
+        JPanelCentreTable.add(new JLabel("Centre de table :"));
+        JPanelCentreTable.add(JButtonMarqueurPremier);
 
 
 
