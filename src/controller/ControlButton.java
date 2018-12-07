@@ -196,7 +196,7 @@ public class ControlButton implements ActionListener {
                                    // System.out.println("Vous ne pouvez pas");
                                     //"Même couleur, on ajoute"
                                         tampon = model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size();
-                                        vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                         vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                         vue.JButtonTuilesLigneMotif[i][tampon].setText("");
                                         model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
 
