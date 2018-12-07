@@ -90,8 +90,8 @@ public class Model {
         return fabriques;
     }
 
-    public Fabrique getCentreTable() {
-        return fabriques[fabriques.length-1];
+    public CentreTable getCentreTable() {
+        return (CentreTable)fabriques[fabriques.length-1];
     }
 
     public Sac getDefausse() {

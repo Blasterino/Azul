@@ -1,5 +1,6 @@
 package controller;
 
+import model.CentreTable;
 import model.CouleurTuile;
 import model.Model;
 import model.Tuile;
@@ -85,39 +86,12 @@ public class ControlButton implements ActionListener {
                             vue.JPanelCentreTable.add(JButtonCentreTable);
                         }
                     }
-                    System.out.println(model.getCentreTable());
 
                     //Désactivation des fabriques
                     for(int j = 0 ; j < 4 ; j++){
                         vue.JButtonTuilesInFabriques[i][j].setEnabled(false);
                     }
                 }
-
-
-                /*if(!tuilesRecup.isEmpty()){
-                    ArrayList<Tuile> tuilesRestantes = new ArrayList<>();
-                    for(int j = 0 ; j < 3 ; j++){
-                        if(tuilesRecup.get(0).getCouleurTuile() == model.getFabriques()[i].getTuilesOnFabrique().get(j).getCouleurTuile()){
-                            tuilesRecup.add(model.getFabriques()[i].getTuilesOnFabrique().get(j));
-                        }
-                        tuilesRestantes.add(model.getFabriques()[i].getTuilesOnFabrique().get(j));
-                    }
-
-                    for(Tuile tuile : tuilesRestantes){
-                        JButton tuileRest = new JButton();
-                        tuileRest.setIcon(new ImageIcon(tuile.getCouleurTuile().getImageTuile()));
-                        vue.JPanelCentreTable.add(tuileRest);
-                    }
-                    model.getFabriques()[i].clearTuilesOnFabrique();
-                }*/
-
-                /*int compteur = 0;
-                for(Tuile tuile : tuilesRecup){
-                    model.getListJoueurs().get(0).addTuileInMain(tuile); // 0 Car on a actuellement que 1 joueurs
-                    vue.JButtonMainJoueur[compteur].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-                    vue.JButtonMainJoueur[compteur].setText("");
-                    compteur++;
-                }*/
             }
 
             //CENTRE TABLE VERS MAIN
@@ -125,14 +99,14 @@ public class ControlButton implements ActionListener {
             for(int i = 0 ; i < model.getCentreTable().getTuilesOnFabrique().size() ; i++){
                 Tuile tuileChoisie = null;
                 //si l'action a été effectuée sur une tuile du centre de table (hors marqueur), on la récupère
-                if(e.getSource() != vue.JButtonMarqueurPremier && e.getSource() == vue.JPanelCentreTable.getComponent(i)){
+                if(e.getSource() != vue.JButtonMarqueurPremier && e.getSource() == vue.JPanelCentreTable.getComponent(i+1)){
                     tuileChoisie = model.getCentreTable().getTuilesOnFabrique().get(i);
-                    vue.JPanelCentreTable.remove(vue.JPanelCentreTable.getComponent(i+1));
                 }
 
                 //si on a pu récupérer une tuile, on récupère toutes les autres de la même couleur
                 if(tuileChoisie != null){
-                    model.getCentreTable().prendreTuile(tuileChoisie,model.getCentreTable() ,model.getListJoueurs().get(0));
+                    model.getCentreTable().prendreTuile(tuileChoisie ,model.getListJoueurs().get(0));
+                    System.out.println(model.getCentreTable());
                     //Ajout dans la main des tuiles
                     for(int j = 0 ; j < model.getListJoueurs().get(0).getMainActuelle().size() ; j++){
                         JLabel JLabelMainJoueur = new JLabel();
@@ -144,7 +118,24 @@ public class ControlButton implements ActionListener {
                 }
             }
 
-            // de la main vers la ligne de motif
+            //Redisposition du centre de la table
+            //On enlève tout ce qu'il y a dans l'affichage pour éviter les doublons
+            vue.JPanelCentreTable.removeAll();
+            //On remet le texte et le marqueur
+            vue.JPanelCentreTable.add(new JLabel("Centre de table : "));
+            vue.JPanelCentreTable.add(vue.JButtonMarqueurPremier);
+            for(int j = 0 ; j < model.getCentreTable().getTuilesOnFabrique().size() ; j++){
+                //condition pour éviter d'avoir le marqueur en doublon ou trop petit à cause du Dimension
+                if(model.getCentreTable().getTuilesOnFabrique().get(j).getCouleurTuile() != CouleurTuile.PREMIERJOUEUR){
+                    JButton JButtonCentreTable = new JButton();
+                    JButtonCentreTable.setIcon(new ImageIcon("Resources/" + model.getCentreTable().getTuilesOnFabrique().get(j).getCouleurTuile().getImageTuile()));
+                    JButtonCentreTable.setPreferredSize(new Dimension(40, 40));
+                    JButtonCentreTable.addActionListener(this);
+                    vue.JPanelCentreTable.add(JButtonCentreTable);
+                }
+            }
+
+            // MAIN VERS LIGNE MOTIF
             for(int i=0; i< 5 ; i++){
                 for(int j=0; j< i+1; j++){
                     if(e.getSource() == vue.JButtonTuilesLigneMotif[i][j]){
