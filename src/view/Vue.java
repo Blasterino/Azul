@@ -124,18 +124,11 @@ public class Vue extends JFrame{
         //MUR
 
         //PLANCHER
-        //En comm car déjà fait dans l'ui
-        JPanelPlancher = new JPanel();
-        JLabelPlancher = new JLabel[7];
-        for(int i = 0; i < 7; i++){
-            JLabelPlancher[i] = new JLabel("jlabel plancher "+i);
-            JPanelPlancher.add(JLabelPlancher[i]);
-        }
 
-        //PENALITES
-        JLabelPenalites = new JLabel[model.getNombreJoueur()];
-        for(int i = 1 ; i <= model.getNombreJoueur() ; i++){
-            JLabelPenalites[i-1] = new JLabel("Taille du plancher de  " + i + " : " + model.getListJoueurs().get(i-1).getPlancher().getListeTuiles().size());
+        JLabelPenalites = new JLabel[7];
+        for(int i = 0 ; i < 7 ; i++){
+        JLabelPenalites[i] = new JLabel();
+        JLabelPenalites[i].setIcon(new ImageIcon("Resources/imageTuileVide.png"));
         }
     }
 
@@ -210,15 +203,10 @@ public class Vue extends JFrame{
 
         //PLANCHER
 
-        JPanelPlancher.setLayout(new GridLayout(1,7));
-        for(int i = 0; i < 7; i++){
-            JPanel JpanelTemp = new JPanel();
-            JpanelTemp.add(JLabelPlancher[i]);
-            JPanelPlancher.add(JpanelTemp);
-        }
+
         //PENALITES
-        JPanelPenalites.setLayout(new GridLayout(1, model.getNombreJoueur(), 10, 10));
-        for(int i = 0 ; i < model.getNombreJoueur(); i++){
+        JPanelPenalites.setLayout(new GridLayout(1, 7, 10, 10));
+        for(int i = 0 ; i < 7; i++){
             JPanelPenalites.add(JLabelPenalites[i]);
         }
 

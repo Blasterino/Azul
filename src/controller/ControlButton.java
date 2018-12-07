@@ -170,12 +170,13 @@ public class ControlButton implements ActionListener {
                                           model.getListJoueurs().get(0).getPlancher().addTuile(tuile);
                                           //vue.JPanelPlancher.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
 
-                                          JLabel JLabelPenalite = new JLabel();
-                                          JLabelPenalite.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-                                          JLabelPenalite.setPreferredSize(new Dimension(40, 40));
-                                          vue.JPanelPlancher.add(JLabelPenalite);
+                                         //CA SERT A RIEN JLabel JLabelPenalite = new JLabel();
+                                        // ca sert a rien aussi  JLabelPenalite.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                          vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()-1].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                          vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()-1].setPreferredSize(new Dimension(40, 40));
+                                         // vue.JPanelPlancher.add(JLabelPenalite);
                                           //juste en attendant pour mettre les penalités au joueur 1
-                                          vue.JLabelPenalites[0].setText("Taille du plancher de  " + 1 + " : "+model.getListJoueurs().get(0).getPlancher().getListeTuiles().size());
+                                        //  vue.JLabelPenalites[].setText("Taille du plancher de  " + 1 + " : "+model.getListJoueurs().get(0).getPlancher().getListeTuiles().size());
                                           //System.out.println(model.getListJoueurs().get(0).getPlancher().getListeTuiles().size());
 
                                       }else{ // sinon on les ajoute normalement dans la ligne de motif
