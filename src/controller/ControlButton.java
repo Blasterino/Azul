@@ -174,6 +174,9 @@ public class ControlButton implements ActionListener {
                                           JLabelPenalite.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                           JLabelPenalite.setPreferredSize(new Dimension(40, 40));
                                           vue.JPanelPlancher.add(JLabelPenalite);
+                                          //juste en attendant pour mettre les penalités au joueur 1
+                                          vue.JLabelPenalites[0].setText("Taille du plancher de  " + 1 + " : "+model.getListJoueurs().get(0).getPlancher().getListeTuiles().size());
+                                          //System.out.println(model.getListJoueurs().get(0).getPlancher().getListeTuiles().size());
 
                                       }else{ // sinon on les ajoute normalement dans la ligne de motif
                                           vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));

@@ -128,7 +128,7 @@ public class Vue extends JFrame{
         JPanelPlancher = new JPanel();
         JLabelPlancher = new JLabel[7];
         for(int i = 0; i < 7; i++){
-            JLabelPlancher[i] = new JLabel();
+            JLabelPlancher[i] = new JLabel("jlabel plancher "+i);
             JPanelPlancher.add(JLabelPlancher[i]);
         }
 
