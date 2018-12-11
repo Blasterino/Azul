@@ -22,7 +22,6 @@ public class Vue extends JFrame{
     protected JPanel JPanelLigneMotif;
     protected JPanel JPanelMur;
     protected JPanel JPanelPenalites;
-    protected JLabel JLabelMur;
     private JLabel JLabelLigneMotif;
     public JPanel JPanelPlancher;
 
@@ -38,6 +37,7 @@ public class Vue extends JFrame{
     //public JButton[] JButtonMainJoueur;
 
     public JLabel[] JLabelPenalites;
+    public JLabel[][] JLabelMur;
 
     public JButton JButtonJouerMenu;
     public JButton JButtonRegles;
@@ -66,6 +66,7 @@ public class Vue extends JFrame{
         JLabelRegles = new JLabel("ici les regles");
         JPanelMenu = new JPanel();
         JPanelRules = new JPanel();
+        //JPanelMur= new JPanel();
         //je l'ai mis en commentaire car c'est pas la peine, pas besoin d'instancier c'est déjà fait dans le .form
         //JPanelPenalites = new JPanel();
         JButtonTuilesCentre = new ArrayList<>();
@@ -101,14 +102,8 @@ public class Vue extends JFrame{
         JPanelMarqueurPremier = new JPanel();
         JButtonMarqueurPremier = new JButton();
         JButtonMarqueurPremier.setIcon(new ImageIcon("Resources/" + model.getFabriques()[JPanelFabriques.length-1].getTuilesOnFabrique().get(0).getCouleurTuile().getImageTuile()));
-        //JButtonMarqueurPremier.setIcon(new ImageIcon("Resources/" + model.getTuilePremierJoueur().getCouleurTuile().getImageTuile()));
-        //JButtonMarqueurPremier.setPreferredSize(new Dimension(40,40));
 
         //MAIN DU JOUEUR
-        /*JButtonMainJoueur = new JButton[4];
-        for(int i = 1 ; i <= 4 ; i++){
-            JButtonMainJoueur[i-1] = new JButton("Tuile " + i);
-        }*/
 
         //LIGNE MOTIF*
         JButtonTuilesLigneMotif = new JButton[5][5];
@@ -121,6 +116,49 @@ public class Vue extends JFrame{
             }
         }
         //MUR
+
+        JLabelMur = new JLabel[5][5];
+        int indiceBleu =0;
+        int indiceJaune =1;
+        int indiceRouge =2;
+        int indiceNoir =3;
+        int indiceBlanc =4;
+        for(int i=0; i<5;i++){
+
+            for(int j=0; j<5;j++) {
+                JLabelMur[i][indiceBleu] = new JLabel();
+                JLabelMur[i][indiceBleu].setIcon(new ImageIcon("Resources/imageTuileBleuHidden.png"));
+
+                JLabelMur[i][indiceJaune] = new JLabel();
+                JLabelMur[i][indiceJaune].setIcon(new ImageIcon("Resources/imageTuileJauneHidden.png"));
+
+                JLabelMur[i][indiceRouge] = new JLabel();
+                JLabelMur[i][indiceRouge].setIcon(new ImageIcon("Resources/imageTuileRougeHidden.png"));
+
+                JLabelMur[i][indiceNoir] = new JLabel();
+                JLabelMur[i][indiceNoir].setIcon(new ImageIcon("Resources/imageTuileNoirHidden.png"));
+
+                JLabelMur[i][indiceBlanc] = new JLabel();
+                JLabelMur[i][indiceBlanc].setIcon(new ImageIcon("Resources/imageTuileBlancheHidden.png"));
+
+            }
+
+            indiceBleu++;
+            if(indiceBleu == 5)
+                indiceBleu=0;
+            indiceJaune++;
+            if(indiceJaune == 5)
+                indiceJaune=0;
+            indiceRouge++;
+            if(indiceRouge == 5)
+                indiceRouge =0;
+            indiceNoir++;
+            if(indiceNoir == 5)
+                indiceNoir=0;
+            indiceBlanc++;
+            if(indiceBlanc == 5)
+                indiceBlanc=0;
+        }
 
         //PLANCHER
 
@@ -199,6 +237,15 @@ public class Vue extends JFrame{
 
 
         //MUR
+        JPanelMur.setLayout(new GridLayout(5,5,10,10));
+        for(int i=0; i<5;i++){
+            for(int j=0;j<5;j++){
+                JPanelMur.add(JLabelMur[i][j]);
+            }
+        }
+
+
+
 
         //PLANCHER
 

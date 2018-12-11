@@ -63,14 +63,7 @@
             </constraints>
             <properties/>
             <border type="none"/>
-            <children>
-              <component id="828d2" class="javax.swing.JLabel" binding="JLabelMur">
-                <constraints border-constraint="Center"/>
-                <properties>
-                  <text value="Mur"/>
-                </properties>
-              </component>
-            </children>
+            <children/>
           </grid>
           <grid id="9a897" binding="JPanelPlancher" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>

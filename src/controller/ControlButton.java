@@ -12,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 
 public class ControlButton implements ActionListener {
@@ -150,33 +149,18 @@ public class ControlButton implements ActionListener {
                                         model.getListJoueurs().get(0).addPenalite(model.getTuilePremierJoueur());
                                         vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setText("Marqueur du premier joueur");
                                     } else {
-                                      /*  if(tampon > i){
-                                            System.out.println("pute");
-                                            vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-                                            model.getListJoueurs().get(0).addPenalite(model.getListJoueurs().get(0).getMainActuelle().get(tampon));
-                                        } else { */
 
                                       //Si on dépasse la taille max de la ligne de motif : on doit en mettre dans le plancher
                                       if(model.getListJoueurs().get(0).ligneDeMotif[i].getTaille() == model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size()){
                                           model.getListJoueurs().get(0).getPlancher().addTuile(tuile);
-                                          //vue.JPanelPlancher.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-
-                                         //CA SERT A RIEN JLabel JLabelPenalite = new JLabel();
-                                        // ca sert a rien aussi  JLabelPenalite.setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                           vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()-1].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                           vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size()-1].setPreferredSize(new Dimension(40, 40));
-                                         // vue.JPanelPlancher.add(JLabelPenalite);
-                                          //juste en attendant pour mettre les penalités au joueur 1
-                                        //  vue.JLabelPenalites[].setText("Taille du plancher de  " + 1 + " : "+model.getListJoueurs().get(0).getPlancher().getListeTuiles().size());
-                                          //System.out.println(model.getListJoueurs().get(0).getPlancher().getListeTuiles().size());
 
                                       }else{ // sinon on les ajoute normalement dans la ligne de motif
                                           vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                           vue.JButtonTuilesLigneMotif[i][tampon].setText("");
                                           model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
                                       }
-                                     //   }
-
                                     }
 
                                     tampon++;

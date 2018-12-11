@@ -9,10 +9,12 @@ public class Plateau {
     private int pointDuJoueur;
     private ArrayList<Tuile> mainActuelle;
     public LigneTuile[] ligneDeMotif;
+    protected boolean tourDeJeu;  // Si le joueur est en train de jouer ou non
 
 
 
     public Plateau() {
+        tourDeJeu = false;
         plancher = new LigneTuile(7);
         pointDuJoueur = 0;
         mainActuelle = new ArrayList<>();
@@ -41,6 +43,14 @@ public class Plateau {
 
     public void addPenalite(Tuile tuile){
         plancher.addTuile(tuile);
+    }
+
+    public boolean isTourDeJeu() {
+        return tourDeJeu;
+    }
+
+    public void setTourDeJeu(boolean tourDeJeu) {
+        this.tourDeJeu = tourDeJeu;
     }
 
     public int getTaillePenalite(){
