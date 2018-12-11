@@ -28,6 +28,7 @@ public class ControlButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == vue.JButtonJouerMenu){
+            model.setJeuEnCours(true);
             vue.creatingGameFrame();
             vue.JPanelBase.updateUI();
         }
@@ -196,6 +197,27 @@ public class ControlButton implements ActionListener {
                     }
                 }
             }
+
+            //fin ligne de motif vers mains
+
+            //Verification de si la ligne de motif est pleine
+            for(int i= 0; i<5;i++) {
+              if(  model.getListJoueurs().get(0).getLigneDeMotif()[i].isLigneTuilePleine()) {
+                  System.out.println("BARRE PLEINE a la ligne : " + (i + 1));
+                  // Si la ligne est pleine, on remplit le mur à côté
+                  String couleurTuileDansLigne;
+                  couleurTuileDansLigne = model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile().getImageTuile();
+                 //Faut changer dans le model le mur model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0);
+                  System.out.println(couleurTuileDansLigne);
+                  vue.JLabelMur[i][0].setIcon(new ImageIcon("Resources/" + couleurTuileDansLigne) );
+
+
+
+              }
+            }
+
+
+
         }
         vue.JPanelBase.updateUI();
         vue.JPanelRules.updateUI();

@@ -52,6 +52,11 @@ public class LigneTuile {
         this.taille = taille;
     }
 
+
+    public boolean isLigneTuilePleine(){
+        return this.getTaille() == this.getListeTuiles().size();
+    }
+
     @Override
     public String toString() {
         return "LigneTuile{" +

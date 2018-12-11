@@ -9,6 +9,7 @@ public class Plateau {
     private int pointDuJoueur;
     private ArrayList<Tuile> mainActuelle;
     public LigneTuile[] ligneDeMotif;
+    public Tuile[][] murPlateau;
     protected boolean tourDeJeu;  // Si le joueur est en train de jouer ou non
 
 
@@ -19,10 +20,15 @@ public class Plateau {
         pointDuJoueur = 0;
         mainActuelle = new ArrayList<>();
         ligneDeMotif = new LigneTuile[5];
+        murPlateau = new Tuile[5][5];
 
         for(int i = 0; i<5; i ++){
                 ligneDeMotif[i] = new LigneTuile(i+1);
+                for(int j= 0; j<5;j++){
+                    murPlateau[i][j] = new Tuile(); // on initialise un tableau avec des tuiles vide
+                }
         }
+
     }
 
     public LigneTuile[] getLigneDeMotif() {
@@ -138,6 +144,7 @@ public class Plateau {
     public void clearMainActuelle(){
         mainActuelle.clear();
     }
+
 
 
 }

@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Model {
-    boolean joueurAvecTuileEnMain;
+    boolean joueurAvecTuileEnMain,jeuEnCours;
     int nombreJoueur;
     ArrayList<Plateau> listJoueurs;
 
@@ -16,6 +16,7 @@ public class Model {
     public Fabrique fabrique;
 
     public Model(int nombreJoueur) {
+        this.jeuEnCours = false;
         this.nombreJoueur = nombreJoueur;
         listJoueurs = new ArrayList<>();
         for(int i = 0; i < nombreJoueur ; i ++){
@@ -118,4 +119,11 @@ public class Model {
         this.joueurAvecTuileEnMain = joueurAvecTuileEnMain;
     }
 
+    public boolean isJeuEnCours() {
+        return jeuEnCours;
+    }
+
+    public void setJeuEnCours(boolean jeuEnCours) {
+        this.jeuEnCours = jeuEnCours;
+    }
 }
