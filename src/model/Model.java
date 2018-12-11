@@ -11,11 +11,13 @@ public class Model {
     Sac sacPioche;
     Sac defausse;
     Tuile tuilePremierJoueur;
+    int tour;
 
 
     public Fabrique fabrique;
 
     public Model(int nombreJoueur) {
+        this.tour = 0;
         this.jeuEnCours = false;
         this.nombreJoueur = nombreJoueur;
         listJoueurs = new ArrayList<>();
@@ -125,5 +127,13 @@ public class Model {
 
     public void setJeuEnCours(boolean jeuEnCours) {
         this.jeuEnCours = jeuEnCours;
+    }
+
+    public int getTour() {
+        return tour;
+    }
+
+    public void setTour(int tour) {
+        this.tour = tour;
     }
 }

@@ -22,7 +22,7 @@ public class Vue extends JFrame{
     protected JPanel JPanelLigneMotif;
     protected JPanel JPanelMur;
     protected JPanel JPanelPenalites;
-    private JLabel JLabelLigneMotif;
+    public JLabel JLabelTour,JLabelLigneMotif;
     public JPanel JPanelPlancher;
 
     public JLabel[] JLabelScores,JLabelPlancher;
@@ -179,10 +179,12 @@ public class Vue extends JFrame{
         JPanelRules.add(JLabelRegles);
         JPanelRules.add(JButtonRetourMenu);
         //SCORE
-        JPanelScore.setLayout(new GridLayout(1, model.getNombreJoueur(), 10, 10));
+        JPanelScore.setLayout(new GridLayout(1, model.getNombreJoueur()+1, 10, 10));
         for(int i = 0 ; i < model.getNombreJoueur() ; i++){
             JPanelScore.add(JLabelScores[i]);
         }
+        JLabelTour = new JLabel("Tour : " + model.getTour());
+        JPanelScore.add(JLabelTour);
 
 
         //MILIEU TABLE
