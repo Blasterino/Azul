@@ -145,6 +145,11 @@ public class Plateau {
         mainActuelle.clear();
     }
 
+    public Tuile[][] getMurPlateau() {
+        return murPlateau;
+    }
 
-
+    public void setMurPlateau(Tuile[][] murPlateau) {
+        this.murPlateau = murPlateau;
+    }
 }

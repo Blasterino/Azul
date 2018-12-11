@@ -224,22 +224,34 @@ public class ControlButton implements ActionListener {
                       int indiceBlanc =4;
                       for(int k=0; k<5;k++) {
                           if(i == k ){
-                          for (int l = 0; l < 5; l++) {
-                            if(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() ==  CouleurTuile.BLEU)
-                              vue.JLabelMur[k][indiceBleu].setIcon(new ImageIcon("Resources/" +  CouleurTuile.BLEU.getImageTuile()));
+                            for (int l = 0; l < 5; l++) {
+                                if (!model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().isEmpty()) {
+                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.BLEU) {
+                                        vue.JLabelMur[k][indiceBleu].setIcon(new ImageIcon("Resources/" + CouleurTuile.BLEU.getImageTuile()));
+                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceBleu] = new Tuile(CouleurTuile.BLEU);
+                                    }
 
-                              if(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() ==  CouleurTuile.JAUNE)
-                              vue.JLabelMur[k][indiceJaune].setIcon(new ImageIcon("Resources/"+CouleurTuile.JAUNE.getImageTuile()));
+                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.JAUNE) {
+                                        vue.JLabelMur[k][indiceJaune].setIcon(new ImageIcon("Resources/" + CouleurTuile.JAUNE.getImageTuile()));
+                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceBleu] = new Tuile(CouleurTuile.BLEU);
+                                    }
 
-                              if(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() ==  CouleurTuile.ROUGE)
-                              vue.JLabelMur[k][indiceRouge].setIcon(new ImageIcon("Resources/" + CouleurTuile.ROUGE.getImageTuile()));
+                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.ROUGE) {
+                                        vue.JLabelMur[k][indiceRouge].setIcon(new ImageIcon("Resources/" + CouleurTuile.ROUGE.getImageTuile()));
+                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceBleu] = new Tuile(CouleurTuile.BLEU);
+                                    }
 
-                              if(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() ==  CouleurTuile.NOIR)
-                              vue.JLabelMur[k][indiceNoir].setIcon(new ImageIcon("Resources/" + CouleurTuile.NOIR.getImageTuile()));
+                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.NOIR) {
+                                        vue.JLabelMur[k][indiceNoir].setIcon(new ImageIcon("Resources/" + CouleurTuile.NOIR.getImageTuile()));
+                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceBleu] = new Tuile(CouleurTuile.BLEU);
+                                    }
 
-                              if(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() ==  CouleurTuile.BLANC)
-                              vue.JLabelMur[k][indiceBlanc].setIcon(new ImageIcon("Resources/" +  CouleurTuile.BLANC.getImageTuile() ));
-                          }
+                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.BLANC) {
+                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceBleu] = new Tuile(CouleurTuile.BLEU);
+                                        vue.JLabelMur[k][indiceBlanc].setIcon(new ImageIcon("Resources/" + CouleurTuile.BLANC.getImageTuile()));
+                                    }
+                                }
+                            }
 
                           }
 
@@ -259,6 +271,8 @@ public class ControlButton implements ActionListener {
                           if (indiceBlanc == 5)
                               indiceBlanc = 0;
                       }
+
+                      model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().removeAll(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles());
                       //fin test
 
 
