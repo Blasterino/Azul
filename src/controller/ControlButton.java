@@ -27,12 +27,11 @@ public class ControlButton implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-
         //On met en place le bouton Jouer,Regles,Retour,Quitter
-        miseEnPlaceMenu(e);
+        //miseEnPlaceMenu(e);
         //fin
 
-
+        vue.JPanelMainJoueur.removeAll(); //juste là pour clear la vue de la main après utilisation (pour éviter que ça s'agrandisse pour rien)
         if(e.getSource() instanceof JButton) {
             for (int i = 0; i < vue.JButtonTuilesInFabriques.length; i++) {
                 Tuile tuileChoisie = null;
@@ -140,7 +139,7 @@ public class ControlButton implements ActionListener {
 
     }
 
-    public void miseEnPlaceMenu(ActionEvent e ){
+/*    public void miseEnPlaceMenu(ActionEvent e ){
         if (e.getSource() == vue.JButtonJouerMenu){
             model.setJeuEnCours(true);
             vue.creatingGameFrame();
@@ -155,7 +154,7 @@ public class ControlButton implements ActionListener {
         if (e.getSource() == vue.JButtonQuitter){
             vue.dispose();
         }
-    }
+    }*/
 
     public void mainVersLigneDeMotif(ActionEvent e){
         for (int i = 0; i < 5; i++) {
@@ -219,7 +218,6 @@ public class ControlButton implements ActionListener {
                 }
             }
         }
-
 
     }
 
@@ -295,7 +293,6 @@ public class ControlButton implements ActionListener {
                         if (indiceBlanc == 5)
                             indiceBlanc = 0;
                     }
-
 
                 }
                 model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().removeAll(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles());

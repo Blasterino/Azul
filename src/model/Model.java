@@ -16,10 +16,10 @@ public class Model {
 
     public Fabrique fabrique;
 
-    public Model(int nombreJoueur) {
+    public Model() {
         this.tour = 0;
         this.jeuEnCours = false;
-        this.nombreJoueur = nombreJoueur;
+        this.nombreJoueur = 4;
         listJoueurs = new ArrayList<>();
         for(int i = 0; i < nombreJoueur ; i ++){
             Plateau joueur = new Plateau();
@@ -135,5 +135,14 @@ public class Model {
 
     public void setTour(int tour) {
         this.tour = tour;
+    }
+
+    public void setNombreJoueur(int nombreJoueur) {
+        this.nombreJoueur = nombreJoueur;
+        listJoueurs.clear();
+        for(int i = 0; i < nombreJoueur ; i ++){
+            Plateau joueur = new Plateau();
+            listJoueurs.add(joueur);
+        }
     }
 }

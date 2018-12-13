@@ -8,7 +8,7 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater( new Runnable() {
             public void run() {
                 //ControlGroup control = new ControlGroup();
-                Model model = new Model(3);
+                Model model = new Model();
                 ControlGroup control = new ControlGroup(model);
             }
         });
