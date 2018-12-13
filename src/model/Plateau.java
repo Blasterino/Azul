@@ -6,6 +6,7 @@ public class Plateau {
     //plateau du joueur
     // A faire plus tard, avec les images,affichage, interactions tout ça tout ça
     LigneTuile plancher;
+    Model model; // pour envoyer des tuiles dans la défausse
     private int pointDuJoueur;
     private ArrayList<Tuile> mainActuelle;
     public LigneTuile[] ligneDeMotif;
@@ -48,7 +49,11 @@ public class Plateau {
     }
 
     public void addPenalite(Tuile tuile){
-        plancher.addTuile(tuile);
+        if(plancher.getListeTuiles().size() == plancher.getTaille()){
+            model.defausseTuile(tuile);
+        } else {
+            plancher.addTuile(tuile);
+        }
     }
 
     public boolean isTourDeJeu() {

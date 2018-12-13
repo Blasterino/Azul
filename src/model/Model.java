@@ -145,4 +145,15 @@ public class Model {
             listJoueurs.add(joueur);
         }
     }
+
+    public void defausseTuile(Tuile tuile){
+        defausse.getContenuSac().add(tuile);
+    }
+
+    public void checkSiAssezTuilesDansSac(){
+        if(sacPioche.getContenuSac().size() < getNombreFabriqueGame()*4){
+            sacPioche.getContenuSac().addAll(defausse.getContenuSac());
+            defausse.getContenuSac().clear();
+        }
+    }
 }

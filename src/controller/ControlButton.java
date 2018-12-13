@@ -174,7 +174,7 @@ public class ControlButton implements ActionListener {
 
                                     //Si on dépasse la taille max de la ligne de motif : on doit en mettre dans le plancher
                                     if (model.getListJoueurs().get(0).ligneDeMotif[i].getTaille() == model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size()) {
-                                        model.getListJoueurs().get(0).getPlancher().addTuile(tuile);
+                                        model.getListJoueurs().get(0).addPenalite(tuile);
                                         vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size() - 1].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                         vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size() - 1].setPreferredSize(new Dimension(40, 40));
 
@@ -295,12 +295,13 @@ public class ControlButton implements ActionListener {
                     }
 
                 }
+                for(Tuile tuile : model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles()){// défausse des tuiles restantes dans la ligne de motif
+                    model.defausseTuile(tuile);
+                }
                 model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().removeAll(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles());
                 model.setTour(model.getTour()+1);
                 vue.JLabelTour.setText("Tour : "+model.getTour());
-
-
-
+                
             }
         }
 

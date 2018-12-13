@@ -32,6 +32,10 @@ public class LigneTuile {
         }
     }
 
+    public boolean removeTuile(Tuile tuile){
+        return listeTuiles.remove(tuile);
+    }
+
     public boolean isVide(){
         return listeTuiles.isEmpty();
     }
