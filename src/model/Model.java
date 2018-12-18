@@ -12,6 +12,8 @@ public class Model {
     Sac defausse;
     Tuile tuilePremierJoueur;
     int tour;
+    Plateau joueurCourant;
+    int indexJoueurCourant;
 
 
     public Fabrique fabrique;
@@ -25,6 +27,8 @@ public class Model {
             Plateau joueur = new Plateau();
             listJoueurs.add(joueur);
         }
+        joueurCourant = listJoueurs.get(0);
+        indexJoueurCourant = 0;
         //variable utilisée
         joueurAvecTuileEnMain = false;
         // Création pioche et défausse
@@ -154,6 +158,20 @@ public class Model {
         if(sacPioche.getContenuSac().size() < getNombreFabriqueGame()*4){
             sacPioche.getContenuSac().addAll(defausse.getContenuSac());
             defausse.getContenuSac().clear();
+        }
+    }
+
+    public Plateau getJoueurCourant(){
+        return joueurCourant;
+    }
+
+    public void tourSuivant(){
+        if(joueurCourant.equals(listJoueurs.get(listJoueurs.size()-1))){
+            joueurCourant = listJoueurs.get(0);
+            indexJoueurCourant = 0;
+        } else {
+            joueurCourant = listJoueurs.get(indexJoueurCourant+1);
+            indexJoueurCourant++;
         }
     }
 }

@@ -90,7 +90,6 @@ public class Vue extends JFrame{
         //Créations des tuiles par fabrique
         JButtonTuilesInFabriques = new JButton[model.getFabriques().length][4];
         for(int i = 0 ; i < JPanelFabriques.length ; i++){
-            System.out.println(String.valueOf(i)+" fois");
             for(int j = 0 ; j < model.getFabriques()[i].getTuilesOnFabrique().size() ; j++){
 
                 JButtonTuilesInFabriques[i][j] = new JButton();
@@ -204,6 +203,9 @@ public class Vue extends JFrame{
         JPanelMilieuTable.setLayout(new GridLayout(3,3,10,10));
         for(int i = 0 ; i < model.getNombreFabriqueGame() ; i++){
             for(int j = 0 ; j < 4 ; j++){
+                System.out.println(JPanelFabriques[0]);
+                System.out.println(JButtonTuilesInFabriques[0][0]);
+                System.out.println(model.getNombreFabriqueGame());
                 JPanelFabriques[i].add(JButtonTuilesInFabriques[i][j]);
             }
         }
@@ -281,12 +283,11 @@ public class Vue extends JFrame{
     public void creatingGameFrame(){
         newGameFrame = new JFrame();
         newGameFrame.add(JPanelBase);
-        System.out.println(getContentPane());
+
         setContentPane(JPanelBase);
         pack();
         setTitle("Azul");
         setDefaultCloseOperation(newGameFrame.EXIT_ON_CLOSE);
-        System.out.println(getContentPane());
     }
     public void  creatingRulesFrame(){
         newRulesFrame = new JFrame();

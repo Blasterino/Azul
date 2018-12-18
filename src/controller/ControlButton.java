@@ -47,13 +47,13 @@ public class ControlButton implements ActionListener {
 
                 //Prise des tuiles dans la main du joueur
                 if (tuileChoisie != null) {
-                    model.getFabriques()[i].prendreTuile(tuileChoisie, model.getCentreTable(), model.getListJoueurs().get(0));
+                    model.getFabriques()[i].prendreTuile(tuileChoisie, model.getCentreTable(), model.getJoueurCourant());
                     //Ajout dans la main des tuiles
-                    for (int j = 0; j < model.getListJoueurs().get(0).getMainActuelle().size(); j++) {
+                    for (int j = 0; j < model.getJoueurCourant().getMainActuelle().size(); j++) {
                         //vue.JButtonMainJoueur[j].setIcon(new ImageIcon("Resources/" + model.getListJoueurs().get(0).getMainActuelle().get(i).getCouleurTuile().getImageTuile()));
                         //vue.JButtonMainJoueur[j].setText("");
                         JLabel JLabelMainJoueur = new JLabel();
-                        JLabelMainJoueur.setIcon(new ImageIcon("Resources/" + model.getListJoueurs().get(0).getMainActuelle().get(j).getCouleurTuile().getImageTuile()));
+                        JLabelMainJoueur.setIcon(new ImageIcon("Resources/" + model.getJoueurCourant().getMainActuelle().get(j).getCouleurTuile().getImageTuile()));
                         JLabelMainJoueur.setPreferredSize(new Dimension(40, 40));
                         vue.JPanelMainJoueur.add(JLabelMainJoueur);
 
@@ -95,12 +95,12 @@ public class ControlButton implements ActionListener {
 
                 //si on a pu récupérer une tuile, on récupère toutes les autres de la même couleur
                 if (tuileChoisie != null) {
-                    model.getCentreTable().prendreTuile(tuileChoisie, model.getListJoueurs().get(0));
+                    model.getCentreTable().prendreTuile(tuileChoisie, model.getJoueurCourant());
                     System.out.println(model.getCentreTable());
                     //Ajout dans la main des tuiles
-                    for (int j = 0; j < model.getListJoueurs().get(0).getMainActuelle().size(); j++) {
+                    for (int j = 0; j < model.getJoueurCourant().getMainActuelle().size(); j++) {
                         JLabel JLabelMainJoueur = new JLabel();
-                        JLabelMainJoueur.setIcon(new ImageIcon("Resources/" + model.getListJoueurs().get(0).getMainActuelle().get(j).getCouleurTuile().getImageTuile()));
+                        JLabelMainJoueur.setIcon(new ImageIcon("Resources/" + model.getJoueurCourant().getMainActuelle().get(j).getCouleurTuile().getImageTuile()));
                         JLabelMainJoueur.setPreferredSize(new Dimension(40, 40));
                         vue.JPanelMainJoueur.add(JLabelMainJoueur);
                     }
@@ -162,26 +162,26 @@ public class ControlButton implements ActionListener {
                 if (e.getSource() == vue.JButtonTuilesLigneMotif[i][j]) {
                     if (model.isJoueurAvecTuileEnMain()) {
                         int tampon = 0;
-                        for (Tuile tuile : model.getListJoueurs().get(0).getMainActuelle()) {
+                        for (Tuile tuile : model.getJoueurCourant().getMainActuelle()) {
                             // Si la ligne est vide, on pose les tuiles sans reflechir
-                            if (model.getListJoueurs().get(0).isEmplacementLigneSpecifiqueVide(i, tampon) && model.isJoueurAvecTuileEnMain()) {
+                            if (model.getJoueurCourant().isEmplacementLigneSpecifiqueVide(i, tampon) && model.isJoueurAvecTuileEnMain()) {
                                 //si on prend la tuile du premier joueur, on prend penalité
                                 if (tuile.equals(model.getTuilePremierJoueur())) {
 
-                                    model.getListJoueurs().get(0).addPenalite(model.getTuilePremierJoueur());
-                                    vue.JLabelPlancher[model.getListJoueurs().get(0).getPlancher().getTaille()].setText("Marqueur du premier joueur");
+                                    model.getJoueurCourant().addPenalite(model.getTuilePremierJoueur());
+                                    vue.JLabelPlancher[model.getJoueurCourant().getPlancher().getTaille()].setText("Marqueur du premier joueur");
                                 } else {
 
                                     //Si on dépasse la taille max de la ligne de motif : on doit en mettre dans le plancher
-                                    if (model.getListJoueurs().get(0).ligneDeMotif[i].getTaille() == model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size()) {
-                                        model.getListJoueurs().get(0).addPenalite(tuile);
-                                        vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size() - 1].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
-                                        vue.JLabelPenalites[model.getListJoueurs().get(0).getPlancher().getListeTuiles().size() - 1].setPreferredSize(new Dimension(40, 40));
+                                    if (model.getJoueurCourant().ligneDeMotif[i].getTaille() == model.getJoueurCourant().ligneDeMotif[i].getListeTuiles().size()) {
+                                        model.getJoueurCourant().addPenalite(tuile);
+                                        vue.JLabelPenalites[model.getJoueurCourant().getPlancher().getListeTuiles().size() - 1].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
+                                        vue.JLabelPenalites[model.getJoueurCourant().getPlancher().getListeTuiles().size() - 1].setPreferredSize(new Dimension(40, 40));
 
                                     } else { // sinon on les ajoute normalement dans la ligne de motif
                                         vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                         vue.JButtonTuilesLigneMotif[i][tampon].setText("");
-                                        model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
+                                        model.getJoueurCourant().ligneDeMotif[i].getListeTuiles().add(tuile);
                                     }
                                 }
 
@@ -189,13 +189,13 @@ public class ControlButton implements ActionListener {
                             }
 
                             // Si des tuiles sont déjà présentes et possédent la même couleurs
-                            else if (model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().get(tampon).getCouleurTuile() == tuile.getCouleurTuile()) {
+                            else if (model.getJoueurCourant().ligneDeMotif[i].getListeTuiles().get(tampon).getCouleurTuile() == tuile.getCouleurTuile()) {
                                 // System.out.println("Vous ne pouvez pas");
                                 //"Même couleur, on ajoute"
-                                tampon = model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().size();
+                                tampon = model.getJoueurCourant().ligneDeMotif[i].getListeTuiles().size();
                                 vue.JButtonTuilesLigneMotif[i][tampon].setIcon(new ImageIcon("Resources/" + tuile.getCouleurTuile().getImageTuile()));
                                 vue.JButtonTuilesLigneMotif[i][tampon].setText("");
-                                model.getListJoueurs().get(0).ligneDeMotif[i].getListeTuiles().add(tuile);
+                                model.getJoueurCourant().ligneDeMotif[i].getListeTuiles().add(tuile);
 
                                 tampon++;
                             } else {
@@ -203,7 +203,7 @@ public class ControlButton implements ActionListener {
                             }
                         }
                         model.setJoueurAvecTuileEnMain(false);
-                        model.getListJoueurs().get(0).getMainActuelle().clear();
+                        model.getJoueurCourant().getMainActuelle().clear();
 
                         // on supprime l'affichage de la main
 
@@ -213,26 +213,30 @@ public class ControlButton implements ActionListener {
                                 vue.JButtonTuilesInFabriques[p][q].setEnabled(true);
                             }
                         }
-
+                        model.tourSuivant();
+                        vue.updateVueNbJoueurs();
+                        vue.setControlButton(this);
+                        //vue.creatingGameFrame();
+                        //vue.JPanelBase.updateUI();
                     }
+
                 }
             }
         }
-
     }
 
     public void passageLigneDeMotifToMur(ActionEvent e){
 
         for(int i= 0; i<5;i++) {
-            if(  model.getListJoueurs().get(0).getLigneDeMotif()[i].isLigneTuilePleine()) {
+            if(  model.getJoueurCourant().getLigneDeMotif()[i].isLigneTuilePleine()) {
                 System.out.println("BARRE PLEINE a la ligne : " + (i + 1));
                 // Si la ligne est pleine, on remplit le mur à côté
                 String couleurTuileDansLigne;
-                couleurTuileDansLigne = model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile().getImageTuile();
+                couleurTuileDansLigne = model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile().getImageTuile();
                 //Faut changer dans le model le mur model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0);
-                System.out.println(couleurTuileDansLigne);
+
                 //  vue.JLabelMur[i][0].setIcon(new ImageIcon("Resources/" + couleurTuileDansLigne) );
-                for(int j=0;j< model.getListJoueurs().get(0).getLigneDeMotif()[i].getTaille(); j++){
+                for(int j=0;j< model.getJoueurCourant().getLigneDeMotif()[i].getTaille(); j++){
 
 
 
@@ -247,30 +251,30 @@ public class ControlButton implements ActionListener {
                     for(int k=0; k<5;k++) {
                         if(i == k ){
                             for (int l = 0; l < 5; l++) {
-                                if (!model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().isEmpty()) {
-                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.BLEU) {
+                                if (!model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().isEmpty()) {
+                                    if (model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.BLEU) {
                                         vue.JLabelMur[k][indiceBleu].setIcon(new ImageIcon("Resources/" + CouleurTuile.BLEU.getImageTuile()));
-                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceBleu] = new Tuile(CouleurTuile.BLEU);
+                                        model.getJoueurCourant().getMurPlateau()[k][indiceBleu] = new Tuile(CouleurTuile.BLEU);
                                     }
 
-                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.JAUNE) {
+                                    if (model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.JAUNE) {
                                         vue.JLabelMur[k][indiceJaune].setIcon(new ImageIcon("Resources/" + CouleurTuile.JAUNE.getImageTuile()));
-                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceJaune] = new Tuile(CouleurTuile.JAUNE);
+                                        model.getJoueurCourant().getMurPlateau()[k][indiceJaune] = new Tuile(CouleurTuile.JAUNE);
                                     }
 
-                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.ROUGE) {
+                                    if (model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.ROUGE) {
                                         vue.JLabelMur[k][indiceRouge].setIcon(new ImageIcon("Resources/" + CouleurTuile.ROUGE.getImageTuile()));
-                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceRouge] = new Tuile(CouleurTuile.ROUGE);
+                                        model.getJoueurCourant().getMurPlateau()[k][indiceRouge] = new Tuile(CouleurTuile.ROUGE);
                                     }
 
-                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.NOIR) {
+                                    if (model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.NOIR) {
                                         vue.JLabelMur[k][indiceNoir].setIcon(new ImageIcon("Resources/" + CouleurTuile.NOIR.getImageTuile()));
-                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceNoir] = new Tuile(CouleurTuile.NOIR);
+                                        model.getJoueurCourant().getMurPlateau()[k][indiceNoir] = new Tuile(CouleurTuile.NOIR);
                                     }
 
-                                    if (model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.BLANC) {
+                                    if (model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().get(0).getCouleurTuile() == CouleurTuile.BLANC) {
                                         vue.JLabelMur[k][indiceBlanc].setIcon(new ImageIcon("Resources/" + CouleurTuile.BLANC.getImageTuile()));
-                                        model.getListJoueurs().get(0).getMurPlateau()[k][indiceBlanc] = new Tuile(CouleurTuile.BLANC);
+                                        model.getJoueurCourant().getMurPlateau()[k][indiceBlanc] = new Tuile(CouleurTuile.BLANC);
                                     }
                                 }
                             }
@@ -295,10 +299,10 @@ public class ControlButton implements ActionListener {
                     }
 
                 }
-                for(Tuile tuile : model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles()){// défausse des tuiles restantes dans la ligne de motif
+                for(Tuile tuile : model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles()){// défausse des tuiles restantes dans la ligne de motif
                     model.defausseTuile(tuile);
                 }
-                model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles().removeAll(model.getListJoueurs().get(0).getLigneDeMotif()[i].getListeTuiles());
+                model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles().removeAll(model.getJoueurCourant().getLigneDeMotif()[i].getListeTuiles());
                 model.setTour(model.getTour()+1);
                 vue.JLabelTour.setText("Tour : "+model.getTour());
 
@@ -310,9 +314,8 @@ public class ControlButton implements ActionListener {
         for(int p = 0;p<5;p++){
             compteur = 0;
             for(int q = 0; q<5; q++) {
-                if(!model.getListJoueurs().get(0).getMurPlateau()[p][q].isColorNull()){
+                if(!model.getJoueurCourant().getMurPlateau()[p][q].isColorNull()){
                     compteur++;
-                    System.out.println("compteur : " + compteur);
                 }
                 if(compteur == 5){
                     System.out.println("ligne pleine");
